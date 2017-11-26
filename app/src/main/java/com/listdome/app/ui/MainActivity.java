@@ -3,6 +3,7 @@ package com.listdome.app.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -11,7 +12,6 @@ import com.listdome.app.R;
 /**
  * Created by raissa on 21/11/2017.
  */
-
 
 public class MainActivity extends BaseActivity {
 
