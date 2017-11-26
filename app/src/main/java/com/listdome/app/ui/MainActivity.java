@@ -3,6 +3,8 @@ package com.listdome.app.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -19,12 +21,41 @@ public class MainActivity extends BaseActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    @BindView(R.id.toolbar)
+    protected Toolbar toolbar;
+
     @BindView(R.id.message)
     protected TextView mTextMessage;
 
     @BindView(R.id.navigation)
     protected BottomNavigationView navigation;
 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        configureToolBarAndNavigationView();
+    }
+
+    /**
+     * Configuration of Toolbar and Bottom Navigation View.
+     */
+    private void configureToolBarAndNavigationView() {
+        Log.v(TAG, "[method] configureToolBarAndNavigationDrawer");
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(getString(R.string.app_name));
+        toolbar.setLogo(R.mipmap.ic_logo);
+
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    /**
+     * Bottom Navigation View Listener
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -44,14 +75,4 @@ public class MainActivity extends BaseActivity {
             return false;
         }
     };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
-
 }
