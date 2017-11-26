@@ -3,9 +3,11 @@ package com.listdome.app.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import com.listdome.app.R;
 
@@ -15,7 +17,13 @@ import com.listdome.app.R;
 
 public class MainActivity extends BaseActivity {
 
-    private TextView mTextMessage;
+    private static final String TAG = MainActivity.class.getSimpleName();
+
+    @BindView(R.id.message)
+    protected TextView mTextMessage;
+
+    @BindView(R.id.navigation)
+    protected BottomNavigationView navigation;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -41,9 +49,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
