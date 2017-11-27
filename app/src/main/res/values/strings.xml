@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">ListDo.Me</string>
 
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_list">List</string>
+    <string name="title_ideas">Ideas</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_analysis">Analysis</string>
 </resources>

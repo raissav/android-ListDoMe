@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import com.listdome.app.R;
 
@@ -13,7 +15,7 @@ import com.listdome.app.R;
  * Created by raissa on 23/11/2017.
  */
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = SplashActivity.class.getSimpleName();
 
@@ -29,6 +31,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onResume() {
         mHandler.sendEmptyMessageDelayed(MSG_CONTINUE, DELAY);
+        hideStatusBar();
         super.onResume();
     }
 
@@ -50,9 +53,22 @@ public class SplashActivity extends BaseActivity {
         }
     });
 
+    /**
+     * Starts List Activity
+     */
     private void startActivity() {
-        Log.v(TAG, "[method] startActivity: " + MainActivity.class.getSimpleName());
-        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        Log.v(TAG, "[method] startActivity: " + ListActivity.class.getSimpleName());
+        startActivity(new Intent(SplashActivity.this, ListActivity.class));
         finish();
+    }
+
+    /**
+     * Hides the status bar.
+     */
+    protected void hideStatusBar() {
+        Log.v(TAG, "[method] hideStatusBar");
+        final View decorView = getWindow().getDecorView();
+        final int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 }
