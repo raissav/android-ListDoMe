@@ -77,9 +77,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         Log.v(TAG, "[method] configureToolBarAndNavigationDrawer");
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(R.string.app_name));
-        toolbar.setLogo(R.mipmap.ic_logo);
-
+        getSupportActionBar().setTitle(getString(getMenuItemTitleId()));
+        //toolbar.setLogo(R.mipmap.ic_logo);
         navigationView.setOnNavigationItemSelectedListener(this);
     }
 
@@ -112,6 +111,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     protected abstract int getContentViewId();
 
     protected abstract int getNavigationMenuItemId();
+
+    protected abstract int getMenuItemTitleId();
 
     protected abstract void configureLayout();
 

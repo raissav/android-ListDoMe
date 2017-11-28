@@ -28,6 +28,11 @@ public class IdeasActivity extends BaseActivity {
     }
 
     @Override
+    protected int getMenuItemTitleId() {
+        return R.string.title_ideas;
+    }
+
+    @Override
     protected void configureLayout() {
         mTextMessage.setText("Ideas");
     }

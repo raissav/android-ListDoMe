@@ -10,10 +10,14 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="toolbarStyle">@style/custom_toolbar</item>
+
+        <item name="colorControlNormal">@android:color/darker_gray</item>
+        <item name="colorControlActivated">@android:color/darker_gray</item>
+        <item name="colorControlHighlight">@android:color/darker_gray</item>
     </style>
 
     <style name="custom_toolbar" parent="@style/Widget.AppCompat.Toolbar">
-        <item name="titleTextColor">@color/colorAccentDark</item>
+        <item name="titleTextColor">@color/lightBlue</item>
     </style>
 
 </resources>
