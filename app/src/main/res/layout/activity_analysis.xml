@@ -7,20 +7,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.listdome.app.ui.IdeasActivity">
+    tools:context="com.listdome.app.ui.AnalysisActivity">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/element_toolbar" />
 
     <TextView
-        android:id="@+id/message_ideas"
+        android:id="@+id/message_analysis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin_base"
-        android:text="@string/title_ideas"
+        android:text="@string/title_analysis"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

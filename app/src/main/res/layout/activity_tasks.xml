@@ -145,6 +145,17 @@
                         android:background="@drawable/background_corner"
                         android:text="DOING" />
 
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_doing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_gravity="center"
+                        android:scrollbars="vertical"
+                        app:layout_constraintTop_toBottomOf="@id/title_doing"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:listitem="@layout/item_doing" />
+
                 </android.support.constraint.ConstraintLayout>
 
             </android.support.v7.widget.CardView>
@@ -178,6 +189,17 @@
                         android:textColor="@color/lightGrey"
                         android:background="@drawable/background_corner"
                         android:text="DONE" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_done"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_gravity="center"
+                        android:scrollbars="vertical"
+                        app:layout_constraintTop_toBottomOf="@id/title_done"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:listitem="@layout/item_doing" />
 
                 </android.support.constraint.ConstraintLayout>
 

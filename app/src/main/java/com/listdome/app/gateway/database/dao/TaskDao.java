@@ -116,6 +116,11 @@ public class TaskDao extends BaseDao<Task> {
                             TaskTable.TABLE_NAME +
                             Database.COLUMN_DOT +
                             TaskTable.DATE_BEGIN +
+                            Database.ORDER_BY_ASC +
+                            Database.COLUMN_SEPARATOR +
+                            TaskTable.TABLE_NAME +
+                            Database.COLUMN_DOT +
+                            TaskTable.DATE_END +
                             Database.ORDER_BY_ASC,              // order by
                     null);                                 // limit
 

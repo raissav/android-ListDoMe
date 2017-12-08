@@ -68,11 +68,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
             case R.id.navigation_ideas:
                 startActivity(new Intent(this, IdeasActivity.class));
                 return true;
-            case R.id.navigation_calendar:
-                //startActivity(new Intent(this, CalendarActivity.class));
-                return true;
             case R.id.navigation_analysis:
-                //startActivity(new Intent(this, AnalysisActivity.class));
+                startActivity(new Intent(this, AnalysisActivity.class));
                 return true;
         }
         return false;

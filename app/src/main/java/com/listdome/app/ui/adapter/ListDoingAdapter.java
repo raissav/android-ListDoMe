@@ -12,6 +12,7 @@ import com.listdome.app.R;
 import com.listdome.app.entity.Task;
 import com.listdome.app.entity.TaskStatus;
 
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,20 +22,20 @@ import butterknife.ButterKnife;
  * Created by raissa on 27/11/2017.
  */
 
-public class ListToDoAdapter extends RecyclerView.Adapter<ListToDoAdapter.ViewHolder> {
+public class ListDoingAdapter extends RecyclerView.Adapter<ListDoingAdapter.ViewHolder> {
 
-    private List<Task> toDoList;
-    private ListToDoListener listener;
+    private List<Task> doingList;
+    private ListDoingListener listener;
 
-    public ListToDoAdapter(final List<Task> toDoList, final ListToDoListener listener) {
-        this.toDoList = toDoList;
+    public ListDoingAdapter(final List<Task> doingList, final ListDoingListener listener) {
+        this.doingList = doingList;
         this.listener = listener;
     }
 
     /**
      * Interface for click item.
      */
-    public interface ListToDoListener {
+    public interface ListDoingListener {
         void onTaskItemLongClick(final Task task);
         void onCheckItemClick(final Task task);
         void onImportantItemClick(final Task task);
@@ -43,54 +44,54 @@ public class ListToDoAdapter extends RecyclerView.Adapter<ListToDoAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_todo, parent, false);
+                .inflate(R.layout.item_doing, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final Task task = toDoList.get(position);
+        final Task task = doingList.get(position);
         holder.bind(task, listener);
     }
 
     @Override
     public int getItemCount() {
-        return this.toDoList.size();
+        return this.doingList.size();
     }
 
-    public void refreshList(final List<Task> toDoList) {
-        this.toDoList = toDoList;
+    public void refreshList(final List<Task> doingList) {
+        this.doingList = doingList;
         notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.text_todo_task)
-        EditText txtTodoTask;
+        @BindView(R.id.text_doing_task)
+        EditText txtDoingTask;
 
-        @BindView(R.id.check_todo_task)
-        CheckBox checkToDoTask;
+        @BindView(R.id.check_doing_task)
+        CheckBox checkDoingTask;
 
-        @BindView(R.id.important_todo_task)
-        ImageButton importantToDoTask;
+        @BindView(R.id.important_doing_task)
+        ImageButton importantDoingTask;
 
         public ViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(final Task task, final ListToDoListener listener) {
+        public void bind(final Task task, final ListDoingListener listener) {
 
-            txtTodoTask.setText(task.getName());
-            checkToDoTask.setChecked(false);
+            txtDoingTask.setText(task.getName());
+            checkDoingTask.setChecked(false);
 
             if (task.isImportant()) {
-                importantToDoTask.setBackgroundResource(R.drawable.ic_star_full);
+                importantDoingTask.setBackgroundResource(R.drawable.ic_star_full);
             } else {
-                importantToDoTask.setBackgroundResource(R.drawable.ic_star_empty);
+                importantDoingTask.setBackgroundResource(R.drawable.ic_star_empty);
             }
 
-            txtTodoTask.setOnLongClickListener(new View.OnLongClickListener() {
+            txtDoingTask.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(final View view) {
                     listener.onTaskItemLongClick(task);
@@ -98,23 +99,23 @@ public class ListToDoAdapter extends RecyclerView.Adapter<ListToDoAdapter.ViewHo
                 }
             });
 
-            checkToDoTask.setOnClickListener(new View.OnClickListener() {
+            checkDoingTask.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View view) {
-                    task.setStatus(TaskStatus.DOING);
-                    task.setDateEnd(null);
+                    task.setStatus(TaskStatus.DONE);
+                    task.setDateEnd(new Date());
                     listener.onCheckItemClick(task);
                 }
             });
 
-            importantToDoTask.setOnClickListener(new View.OnClickListener() {
+            importantDoingTask.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View view) {
                     task.setImportant(!task.isImportant());
                     if (task.isImportant()) {
-                        importantToDoTask.setBackgroundResource(R.drawable.ic_star_full);
+                        importantDoingTask.setBackgroundResource(R.drawable.ic_star_full);
                     } else {
-                        importantToDoTask.setBackgroundResource(R.drawable.ic_star_empty);
+                        importantDoingTask.setBackgroundResource(R.drawable.ic_star_empty);
                     }
                     listener.onImportantItemClick(task);
                 }

@@ -7,37 +7,36 @@
     android:layout_margin="10dp">
 
     <CheckBox
-        android:id="@+id/check_todo_task"
+        android:id="@+id/check_done_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         app:layout_constraintBaseline_toBaselineOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/text_todo_task"
+        app:layout_constraintEnd_toStartOf="@+id/text_done_task"
         app:layout_constraintStart_toStartOf="parent"  />
 
-    <EditText
-        android:id="@+id/text_todo_task"
+    <TextView
+        android:id="@+id/text_done_task"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:background="@null"
         android:padding="5dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/check_todo_task"
-        app:layout_constraintStart_toEndOf="@id/check_todo_task"
-        app:layout_constraintEnd_toStartOf="@+id/important_todo_task"
+        app:layout_constraintBaseline_toBaselineOf="@id/check_done_task"
+        app:layout_constraintStart_toEndOf="@id/check_done_task"
+        app:layout_constraintEnd_toStartOf="@+id/important_done_task"
         android:hint="Task"
         android:textSize="18sp"
         android:inputType="text"
         android:maxLines="1" />
 
     <ImageButton
-        android:id="@+id/important_todo_task"
+        android:id="@+id/important_done_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_star_empty"
-        android:clickable="true"
-        app:layout_constraintBaseline_toBaselineOf="@id/text_todo_task"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_done_task"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

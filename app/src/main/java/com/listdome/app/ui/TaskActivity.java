@@ -26,6 +26,8 @@ import com.listdome.app.entity.TaskStatus;
 import com.listdome.app.infrastructure.operation.OperationError;
 import com.listdome.app.infrastructure.operation.OperationListener;
 import com.listdome.app.manager.TaskManager;
+import com.listdome.app.ui.adapter.ListDoingAdapter;
+import com.listdome.app.ui.adapter.ListDoneAdapter;
 import com.listdome.app.ui.adapter.ListToDoAdapter;
 
 import java.text.SimpleDateFormat;
@@ -60,10 +62,18 @@ public class TaskActivity extends BaseActivity {
     @BindView(R.id.list_todo)
     protected RecyclerView recyclerListToDo;
 
+    @BindView(R.id.list_doing)
+    protected RecyclerView recyclerListDoing;
+
+    @BindView(R.id.list_done)
+    protected RecyclerView recyclerListDone;
+
     @BindView(R.id.progress_bar)
     protected ProgressBar progressBar;
 
     protected ListToDoAdapter listToDoAdapter;
+    protected ListDoingAdapter listDoingAdapter;
+    protected ListDoneAdapter listDoneAdapter;
 
     protected List<Task> toDoList;
     protected List<Task> doingList;
@@ -73,7 +83,7 @@ public class TaskActivity extends BaseActivity {
 
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_list;
+        return R.layout.activity_tasks;
     }
 
     @Override
@@ -88,7 +98,7 @@ public class TaskActivity extends BaseActivity {
         final SimpleDateFormat format = new SimpleDateFormat("  dd, MMM yyyy", Locale.US);
         final String date = format.format(new Date());
 
-        return getString(R.string.title_list, date);
+        return getString(R.string.title_tasks, date);
     }
 
     @Override
@@ -119,17 +129,33 @@ public class TaskActivity extends BaseActivity {
     private void setRecyclerViews() {
         Log.v(TAG, "[method] setRecyclerViews");
 
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        recyclerListToDo.setLayoutManager(layoutManager);
+        final LinearLayoutManager lmToDoList = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerListToDo.setLayoutManager(lmToDoList);
         recyclerListToDo.setHasFixedSize(true);
+
+        final LinearLayoutManager lmDoingList = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerListDoing.setLayoutManager(lmDoingList);
+        recyclerListDoing.setHasFixedSize(true);
+
+        final LinearLayoutManager lmDoneList = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerListDone.setLayoutManager(lmDoneList);
+        recyclerListDone.setHasFixedSize(true);
     }
 
     /**
-     * Load the route list adapter
+     * Load the lists adapters
      */
     private void setAdapters() {
         Log.v(TAG, "[method] setAdapters");
+        setToDoAdapter();
+        setDoingAdapter();
+        setDoneAdapter();
+    }
 
+    /**
+     * Load the to do list adapter
+     */
+    private void setToDoAdapter() {
         toDoList = new ArrayList<>();
 
         listToDoAdapter = new ListToDoAdapter(toDoList, new ListToDoAdapter.ListToDoListener() {
@@ -137,12 +163,12 @@ public class TaskActivity extends BaseActivity {
             public void onTaskItemLongClick(final Task task) {
                 Log.v(TAG, "[method] onTaskItemLongClick");
                 hideKeyboard(txtNewText);
-                openConfirmationDialog(task);
+                showRemoveTaskDialog(task, TaskStatus.TODO);
             }
 
             @Override
-            public void onStartItemClick(final Task task) {
-                Log.v(TAG, "[method] onStartItemClick");
+            public void onCheckItemClick(final Task task) {
+                Log.v(TAG, "[method] onCheckItemClick");
                 updateTask(task);
             }
 
@@ -154,6 +180,61 @@ public class TaskActivity extends BaseActivity {
         });
 
         recyclerListToDo.setAdapter(listToDoAdapter);
+    }
+
+    /**
+     * Load the doing list adapter
+     */
+    private void setDoingAdapter() {
+        doingList = new ArrayList<>();
+
+        listDoingAdapter = new ListDoingAdapter(doingList, new ListDoingAdapter.ListDoingListener() {
+            @Override
+            public void onTaskItemLongClick(final Task task) {
+                Log.v(TAG, "[method] onTaskItemLongClick");
+                hideKeyboard(txtNewText);
+                showStopTaskDialog(task);
+            }
+
+            @Override
+            public void onCheckItemClick(final Task task) {
+                Log.v(TAG, "[method] onCheckItemClick");
+                updateTask(task);
+            }
+
+            @Override
+            public void onImportantItemClick(final Task task) {
+                Log.v(TAG, "[method] onImportantItemClick");
+                updateTask(task);
+            }
+        });
+
+        recyclerListDoing.setAdapter(listDoingAdapter);
+    }
+
+    /**
+     * Load the done list adapter
+     */
+    private void setDoneAdapter() {
+        doneList = new ArrayList<>();
+
+        listDoneAdapter = new ListDoneAdapter(doneList, new ListDoneAdapter.ListDoneListener() {
+            @Override
+            public void onTaskItemLongClick(final Task task) {
+                Log.v(TAG, "[method] onTaskItemLongClick");
+                hideKeyboard(txtNewText);
+                showRemoveTaskDialog(task, TaskStatus.DONE);
+            }
+
+            @Override
+            public void onCheckItemClick(final Task task) {
+                Log.v(TAG, "[method] onCheckItemClick");
+                updateTask(task);
+            }
+
+        });
+
+        recyclerListDone.setAdapter(listDoneAdapter);
     }
 
     /**
@@ -208,6 +289,8 @@ public class TaskActivity extends BaseActivity {
 
                 getTaskLists();
                 listToDoAdapter.notifyDataSetChanged();
+                listDoingAdapter.notifyDataSetChanged();
+                listDoneAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -226,7 +309,7 @@ public class TaskActivity extends BaseActivity {
      *
      * @param task - task to be removed
      */
-    private void deleteTask(final Task task) {
+    private void deleteTask(final Task task, final TaskStatus status) {
         Log.v(TAG, "[method] deleteTask");
 
         progressBar.setVisibility(View.VISIBLE);
@@ -238,8 +321,14 @@ public class TaskActivity extends BaseActivity {
                 Log.v(TAG, "[condition] onSuccess");
                 super.onSuccess(result);
 
-                toDoList.remove(task);
-                listToDoAdapter.notifyDataSetChanged();
+                if (status == TaskStatus.TODO) {
+                    toDoList.remove(task);
+                    listToDoAdapter.notifyDataSetChanged();
+
+                } else if (status == TaskStatus.DONE) {
+                    doneList.remove(task);
+                    listDoneAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -306,6 +395,8 @@ public class TaskActivity extends BaseActivity {
         }
 
         listToDoAdapter.refreshList(toDoList);
+        listDoingAdapter.refreshList(doingList);
+        listDoneAdapter.refreshList(doneList);
     }
 
     /**
@@ -338,22 +429,22 @@ public class TaskActivity extends BaseActivity {
     }
 
     /**
-     * Open the confirmation Dialog to delete task.
+     * Open the confirmation Dialog to delete the task.
      *
      * @param task
      */
-    private void openConfirmationDialog(final Task task) {
-        Log.v(TAG, "[method] openConfirmationDialog");
+    private void showRemoveTaskDialog(final Task task, final TaskStatus status) {
+        Log.v(TAG, "[method] showRemoveTaskDialog");
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setTitle(getString(R.string.task_remove_dialog_title))
-            .setMessage(getString(R.string.task_remove_dialog_message))
+        builder.setTitle(getString(R.string.remove_task_dialog_title))
+            .setMessage(getString(R.string.remove_task_dialog_message))
             .setIcon(android.R.drawable.ic_delete)
 
             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    deleteTask(task);
+                    deleteTask(task, status);
                     dialog.cancel();
                 }
             })
@@ -364,6 +455,36 @@ public class TaskActivity extends BaseActivity {
                 }
             })
             .show();
+    }
+
+    /**
+     * Open the confirmation Dialog to stop the task.
+     *
+     * @param task
+     */
+    private void showStopTaskDialog(final Task task) {
+        Log.v(TAG, "[method] showStopTaskDialog");
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle(getString(R.string.stop_task_dialog_title))
+                .setMessage(getString(R.string.stop_task_dialog_message))
+                .setIcon(android.R.drawable.ic_dialog_alert)
+
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        task.setStatus(TaskStatus.TODO);
+                        updateTask(task);
+                        dialog.cancel();
+                    }
+                })
+
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
     }
 
     @OnClick(R.id.add_task)

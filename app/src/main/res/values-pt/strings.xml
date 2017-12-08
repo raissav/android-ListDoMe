@@ -1,17 +1,21 @@
 <resources>
     <string name="app_name">ListDo.Me</string>
 
-    <string name="title_list">Lista Diária - %1$s</string>
+    <string name="title_tasks">Tarefas Diárias - %1$s</string>
     <string name="title_ideas">Ideais</string>
     <string name="title_calendar">Calendário</string>
     <string name="title_analysis">Análise</string>
 
-    <string name="title_menu_list">Lista</string>
+    <string name="title_menu_tasks">Tarefas</string>
     <string name="title_menu_ideas">Ideais</string>
     <string name="title_menu_calendar">Calendário</string>
     <string name="title_menu_analysis">Análise</string>
 
     <string name="task_list_error">Não foi possível carregar os dados das tarefas. Tente novamente.</string>
-    <string name="task_remove_dialog_title">Remover Tarefa?</string>
-    <string name="task_remove_dialog_message">Tem certeza que deseja remover a tarefa?</string>
+
+    <string name="remove_task_dialog_title">Remover Tarefa?</string>
+    <string name="remove_task_dialog_message">Tem certeza que deseja remover a tarefa?</string>
+
+    <string name="stop_task_dialog_title">Parar Tarefa?</string>
+    <string name="stop_task_dialog_message">Tem certeza que deseja parar a tarefa?</string>
 </resources>
