@@ -4,10 +4,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.listdome.app.R;
+import com.listdome.app.entity.Task;
+import com.listdome.app.entity.TaskStatus;
 
 import java.util.List;
 
@@ -20,10 +23,10 @@ import butterknife.ButterKnife;
 
 public class ListToDoAdapter extends RecyclerView.Adapter<ListToDoAdapter.ViewHolder> {
 
-    private List<String> toDoList;
+    private List<Task> toDoList;
     private ListToDoListener listener;
 
-    public ListToDoAdapter(final List<String> toDoList, final ListToDoListener listener) {
+    public ListToDoAdapter(final List<Task> toDoList, final ListToDoListener listener) {
         this.toDoList = toDoList;
         this.listener = listener;
     }
@@ -32,8 +35,9 @@ public class ListToDoAdapter extends RecyclerView.Adapter<ListToDoAdapter.ViewHo
      * Interface for click item.
      */
     public interface ListToDoListener {
-        void onStartItemClick(final View v, int position, String toDo);
-        void onImportantItemClick(final View v, int position, String toDo);
+        void onTaskItemLongClick(final Task task);
+        void onStartItemClick(final Task task);
+        void onImportantItemClick(final Task task);
     }
 
     @Override
@@ -45,8 +49,8 @@ public class ListToDoAdapter extends RecyclerView.Adapter<ListToDoAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final String toDo = toDoList.get(position);
-        holder.bind(position, toDo, listener);
+        final Task toDo = toDoList.get(position);
+        holder.bind(toDo, listener);
     }
 
     @Override
@@ -54,7 +58,7 @@ public class ListToDoAdapter extends RecyclerView.Adapter<ListToDoAdapter.ViewHo
         return this.toDoList.size();
     }
 
-    public void refreshList(final List<String> toDoList) {
+    public void refreshList(final List<Task> toDoList) {
         this.toDoList = toDoList;
         notifyDataSetChanged();
     }
@@ -65,7 +69,7 @@ public class ListToDoAdapter extends RecyclerView.Adapter<ListToDoAdapter.ViewHo
         EditText txtTodoTask;
 
         @BindView(R.id.start_task)
-        ImageButton btnStartTask;
+        CheckBox btnStartTask;
 
         @BindView(R.id.important_task)
         ImageButton btnImportantTask;
@@ -75,21 +79,44 @@ public class ListToDoAdapter extends RecyclerView.Adapter<ListToDoAdapter.ViewHo
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(final int position, final String toDo, final ListToDoListener listener) {
+        public void bind(final Task task, final ListToDoListener listener) {
 
-            txtTodoTask.setText(toDo);
+            txtTodoTask.setText(task.getName());
+            btnStartTask.setChecked(false);
+
+            if (task.isImportant()) {
+                btnImportantTask.setBackgroundResource(R.drawable.ic_star_full);
+            } else {
+                btnImportantTask.setBackgroundResource(R.drawable.ic_star_empty);
+            }
+
+            txtTodoTask.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(final View view) {
+                    listener.onTaskItemLongClick(task);
+                    return false;
+                }
+            });
 
             btnStartTask.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View view) {
-                    listener.onStartItemClick(btnStartTask, position, toDo);
+                    task.setStatus(TaskStatus.DOING);
+                    task.setDateEnd(null);
+                    listener.onStartItemClick(task);
                 }
             });
 
             btnImportantTask.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View view) {
-                    listener.onImportantItemClick(btnImportantTask, position, toDo);
+                    task.setImportant(!task.isImportant());
+                    if (task.isImportant()) {
+                        btnImportantTask.setBackgroundResource(R.drawable.ic_star_full);
+                    } else {
+                        btnImportantTask.setBackgroundResource(R.drawable.ic_star_empty);
+                    }
+                    listener.onImportantItemClick(task);
                 }
             });
         }

@@ -57,8 +57,8 @@ public class SplashActivity extends AppCompatActivity {
      * Starts List Activity
      */
     private void startActivity() {
-        Log.v(TAG, "[method] startActivity: " + ListActivity.class.getSimpleName());
-        startActivity(new Intent(SplashActivity.this, ListActivity.class));
+        Log.v(TAG, "[method] startActivity: " + TaskActivity.class.getSimpleName());
+        startActivity(new Intent(SplashActivity.this, TaskActivity.class));
         finish();
     }
 

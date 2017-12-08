@@ -4,6 +4,9 @@ import android.widget.TextView;
 
 import com.listdome.app.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 
 /**
@@ -28,13 +31,18 @@ public class IdeasActivity extends BaseActivity {
     }
 
     @Override
-    protected int getMenuItemTitleId() {
-        return R.string.title_ideas;
+    protected String getMenuItemTitle() {
+        return getString(R.string.title_ideas);
     }
 
     @Override
-    protected void configureLayout() {
+    protected void loadElements() {
         mTextMessage.setText("Ideas");
+    }
+
+    @Override
+    protected void cancelOperations() {
+
     }
 
 }

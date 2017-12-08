@@ -36,7 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         ButterKnife.bind(this);
 
         configureToolBarAndNavigationView();
-        configureLayout();
+        loadElements();
     }
 
     @Override
@@ -52,10 +52,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    protected void onDestroy() {
+        super.onDestroy();
+        cancelOperations();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(final @NonNull MenuItem item) {
+        Log.v(TAG, "[method] onNavigationItemSelected: " + item.getItemId());
+
         switch (item.getItemId()) {
             case R.id.navigation_list:
-                startActivity(new Intent(this, ListActivity.class));
+                startActivity(new Intent(this, TaskActivity.class));
                 return true;
             case R.id.navigation_ideas:
                 startActivity(new Intent(this, IdeasActivity.class));
@@ -77,7 +85,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         Log.v(TAG, "[method] configureToolBarAndNavigationDrawer");
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(getMenuItemTitleId()));
+        getSupportActionBar().setTitle(getMenuItemTitle());
         //toolbar.setLogo(R.mipmap.ic_logo);
         navigationView.setOnNavigationItemSelectedListener(this);
     }
@@ -87,6 +95,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
      */
     private void updateNavigationBarState() {
         Log.v(TAG, "[method] updateNavigationBarState");
+
         int actionId = getNavigationMenuItemId();
         selectBottomNavigationBarItem(actionId);
     }
@@ -97,6 +106,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
      */
     private void selectBottomNavigationBarItem(final int itemId) {
         Log.v(TAG, "[method] selectBottomNavigationBarItem: " + itemId);
+
         final Menu menu = navigationView.getMenu();
         for (int i = 0, size = menu.size(); i < size; i++) {
             final MenuItem item = menu.getItem(i);
@@ -112,8 +122,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
 
     protected abstract int getNavigationMenuItemId();
 
-    protected abstract int getMenuItemTitleId();
+    protected abstract String getMenuItemTitle();
 
-    protected abstract void configureLayout();
+    protected abstract void loadElements();
+
+    protected abstract void cancelOperations();
 
 }
