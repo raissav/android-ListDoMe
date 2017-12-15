@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
@@ -34,6 +33,7 @@
         android:layout_above="@id/navigation" >
 
         <LinearLayout
+            android:id="@+id/container_tasks"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >

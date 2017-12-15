@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -16,13 +15,12 @@ import com.listdome.app.R;
 import com.listdome.app.entity.Task;
 import com.listdome.app.entity.TaskStatus;
 
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.listdome.app.ui.utils.AnimationUtils.blinkBackground;
+import static com.listdome.app.ui.utils.ColorAnimationUtils.blinkBackground;
 
 /**
  * Created by raissa on 27/11/2017.

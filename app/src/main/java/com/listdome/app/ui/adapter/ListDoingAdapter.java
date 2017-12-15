@@ -1,11 +1,6 @@
 package com.listdome.app.ui.adapter;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.TransitionDrawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,8 +20,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.listdome.app.ui.utils.AnimationUtils.animateView;
-import static com.listdome.app.ui.utils.AnimationUtils.blinkBackground;
+import static com.listdome.app.ui.utils.ColorAnimationUtils.animateView;
+import static com.listdome.app.ui.utils.ColorAnimationUtils.blinkBackground;
 
 /**
  * Created by raissa on 27/11/2017.

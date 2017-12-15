@@ -1,8 +1,12 @@
 package com.listdome.app.ui;
 
+import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.listdome.app.R;
+import com.listdome.app.ui.utils.SlideAnimationUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,8 +21,8 @@ public class IdeasActivity extends BaseActivity {
 
     private static final String TAG = IdeasActivity.class.getSimpleName();
 
-    @BindView(R.id.message_ideas)
-    protected TextView mTextMessage;
+    @BindView(R.id.container_ideas)
+    protected ConstraintLayout containerIdeas;
 
     @Override
     protected int getContentViewId() {
@@ -37,12 +41,15 @@ public class IdeasActivity extends BaseActivity {
 
     @Override
     protected void loadElements() {
-        mTextMessage.setText("Ideas");
     }
 
     @Override
     protected void cancelOperations() {
+    }
 
+    @Override
+    protected void animateTransaction() {
+        SlideAnimationUtils.slideInFromRight(this, containerIdeas);
     }
 
 }

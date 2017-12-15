@@ -11,7 +11,7 @@ import android.view.View;
  * Created by raissa on 15/12/2017.
  */
 
-public final class AnimationUtils {
+public final class ColorAnimationUtils {
 
     public static void animateView(final View view, final int colorBlink, final int regularColor) {
 

@@ -9,9 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.listdome.app.R;
+import com.listdome.app.ui.utils.SlideAnimationUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,6 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         setContentView(getContentViewId());
         ButterKnife.bind(this);
 
+        animateTransaction();
         configureToolBarAndNavigationView();
         loadElements();
     }
@@ -48,6 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     protected void onStart() {
         super.onStart();
         updateNavigationBarState();
+        animateTransaction();
     }
 
     @Override
@@ -67,12 +71,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         Log.v(TAG, "[method] onNavigationItemSelected: " + item.getItemId());
 
         switch (item.getItemId()) {
+
             case R.id.navigation_list:
                 startActivity(new Intent(this, TaskActivity.class));
                 return true;
+
             case R.id.navigation_ideas:
                 startActivity(new Intent(this, IdeasActivity.class));
                 return true;
+
             case R.id.navigation_analysis:
                 startActivity(new Intent(this, AnalysisActivity.class));
                 return true;
@@ -92,6 +99,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         final SimpleDateFormat format = new SimpleDateFormat("  dd, MMM yyyy", Locale.US);
         final String date = format.format(new Date());
         getSupportActionBar().setSubtitle(date);
+
+        if (toolbar.getChildCount() > 1) {
+            final View view0 = toolbar.getChildAt(0);
+            SlideAnimationUtils.slideInFromRight(this, view0);
+            final View view1 = toolbar.getChildAt(1);
+            SlideAnimationUtils.slideInFromRight(this, view1);
+        }
 
         navigationView.setOnNavigationItemSelectedListener(this);
     }
@@ -133,5 +147,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     protected abstract void loadElements();
 
     protected abstract void cancelOperations();
+
+    protected abstract void animateTransaction();
 
 }

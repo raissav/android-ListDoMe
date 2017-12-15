@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import com.listdome.app.manager.TaskManager;
 import com.listdome.app.ui.adapter.ListDoingAdapter;
 import com.listdome.app.ui.adapter.ListDoneAdapter;
 import com.listdome.app.ui.adapter.ListToDoAdapter;
+import com.listdome.app.ui.utils.SlideAnimationUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,6 +43,9 @@ import java.util.List;
 public class TaskActivity extends BaseActivity {
 
     private static final String TAG = TaskActivity.class.getSimpleName();
+
+    @BindView(R.id.container_tasks)
+    protected LinearLayout containerTasks;
 
     @BindView(R.id.card_todo)
     protected CardView cardToDo;
@@ -119,6 +124,11 @@ public class TaskActivity extends BaseActivity {
         if (mTaskManager != null) {
             mTaskManager.cancelOperations();
         }
+    }
+
+    @Override
+    protected void animateTransaction() {
+        SlideAnimationUtils.slideInFromRight(this, containerTasks);
     }
 
     /**

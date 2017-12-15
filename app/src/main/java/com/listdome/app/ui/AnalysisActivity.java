@@ -2,15 +2,18 @@ package com.listdome.app.ui;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.listdome.app.R;
 import com.listdome.app.infrastructure.operation.OperationError;
 import com.listdome.app.infrastructure.operation.OperationListener;
 import com.listdome.app.manager.AnalysisManager;
+import com.listdome.app.ui.utils.SlideAnimationUtils;
 
 import java.util.List;
 
@@ -23,6 +26,9 @@ import butterknife.BindView;
 public class AnalysisActivity extends BaseActivity {
 
     private static final String TAG = AnalysisActivity.class.getSimpleName();
+
+    @BindView(R.id.container_analysis)
+    protected ConstraintLayout containerAnalysis;
 
     @BindView(R.id.card_quantity_day)
     protected CardView cardQuantityDay;
@@ -89,6 +95,11 @@ public class AnalysisActivity extends BaseActivity {
         if (mAnalysisManager != null) {
             mAnalysisManager.cancelOperations();
         }
+    }
+
+    @Override
+    protected void animateTransaction() {
+        SlideAnimationUtils.slideInFromRight(this, containerAnalysis);
     }
 
     /**
