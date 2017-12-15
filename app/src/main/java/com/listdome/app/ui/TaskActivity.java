@@ -159,7 +159,7 @@ public class TaskActivity extends BaseActivity {
     private void setToDoAdapter() {
         toDoList = new ArrayList<>();
 
-        listToDoAdapter = new ListToDoAdapter(toDoList, new ListToDoAdapter.ListToDoListener() {
+        listToDoAdapter = new ListToDoAdapter(toDoList, this, new ListToDoAdapter.ListToDoListener() {
             @Override
             public void onTaskItemLongClick(final Task task) {
                 Log.v(TAG, "[method] onTaskItemLongClick");
@@ -189,7 +189,7 @@ public class TaskActivity extends BaseActivity {
     private void setDoingAdapter() {
         doingList = new ArrayList<>();
 
-        listDoingAdapter = new ListDoingAdapter(doingList, new ListDoingAdapter.ListDoingListener() {
+        listDoingAdapter = new ListDoingAdapter(doingList, this, new ListDoingAdapter.ListDoingListener() {
             @Override
             public void onTaskItemLongClick(final Task task) {
                 Log.v(TAG, "[method] onTaskItemLongClick");
@@ -219,7 +219,7 @@ public class TaskActivity extends BaseActivity {
     private void setDoneAdapter() {
         doneList = new ArrayList<>();
 
-        listDoneAdapter = new ListDoneAdapter(doneList, new ListDoneAdapter.ListDoneListener() {
+        listDoneAdapter = new ListDoneAdapter(doneList, this, new ListDoneAdapter.ListDoneListener() {
             @Override
             public void onTaskItemLongClick(final Task task) {
                 Log.v(TAG, "[method] onTaskItemLongClick");
@@ -310,6 +310,7 @@ public class TaskActivity extends BaseActivity {
 
         if (previousStatus == TaskStatus.TODO) {
             toDoList.remove(task);
+            listToDoAdapter.removeLastPosition();
             listToDoAdapter.notifyDataSetChanged();
 
             doingList.add(task);
@@ -317,6 +318,7 @@ public class TaskActivity extends BaseActivity {
 
         } else if (previousStatus == TaskStatus.DOING) {
             doingList.remove(task);
+            listDoingAdapter.removeLastPosition();
             listDoingAdapter.notifyDataSetChanged();
 
             if (task.getStatus() == TaskStatus.TODO) {
@@ -330,6 +332,7 @@ public class TaskActivity extends BaseActivity {
 
         } else {
             doneList.remove(task);
+            listDoneAdapter.removeLastPosition();
             listDoneAdapter.notifyDataSetChanged();
 
             doingList.add(task);
@@ -356,10 +359,12 @@ public class TaskActivity extends BaseActivity {
 
                 if (status == TaskStatus.TODO) {
                     toDoList.remove(task);
+                    listToDoAdapter.removeLastPosition();
                     listToDoAdapter.notifyDataSetChanged();
 
                 } else if (status == TaskStatus.DONE) {
                     doneList.remove(task);
+                    listDoneAdapter.removeLastPosition();
                     listDoneAdapter.notifyDataSetChanged();
                 }
             }

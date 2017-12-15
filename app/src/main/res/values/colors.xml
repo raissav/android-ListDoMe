@@ -3,7 +3,9 @@
     <color name="colorPrimary">#0B699C</color>
     <color name="colorPrimaryDark">#075F8C</color>
     <color name="colorAccent">#97B3E2</color>
+    <color name="opacityBlue">#5597B3E2</color>
 
+    <color name="opacityYellow">#77FCE5AB</color>
     <color name="yellow">#FCE5AB</color>
     <color name="darkYellow">#FCD571</color>
 

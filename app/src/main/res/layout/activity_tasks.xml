@@ -44,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
                 card_view:cardBackgroundColor="@color/lightSnow"
                 card_view:cardCornerRadius="10dp"
                 card_view:cardElevation="5dp"
@@ -113,6 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
                 card_view:cardBackgroundColor="@color/lightSnow"
                 card_view:cardCornerRadius="10dp"
                 card_view:cardElevation="5dp"
@@ -165,11 +167,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 card_view:cardBackgroundColor="@color/lightSnow"
                 card_view:cardCornerRadius="10dp"
                 card_view:cardElevation="5dp"
-                card_view:cardUseCompatPadding="true"
-                android:layout_marginBottom="15dp">
+                card_view:cardUseCompatPadding="true">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"

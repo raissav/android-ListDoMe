@@ -1,5 +1,12 @@
 package com.listdome.app.ui.adapter;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.TransitionDrawable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +25,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.listdome.app.ui.utils.AnimationUtils.animateView;
+import static com.listdome.app.ui.utils.AnimationUtils.blinkBackground;
+
 /**
  * Created by raissa on 27/11/2017.
  */
@@ -26,10 +36,14 @@ public class ListDoingAdapter extends RecyclerView.Adapter<ListDoingAdapter.View
 
     private List<Task> doingList;
     private ListDoingListener listener;
+    private Context context;
+    private int lastPosition;
 
-    public ListDoingAdapter(final List<Task> doingList, final ListDoingListener listener) {
+    public ListDoingAdapter(final List<Task> doingList, final Context context, final ListDoingListener listener) {
         this.doingList = doingList;
         this.listener = listener;
+        this.context = context;
+        this.lastPosition = -1;
     }
 
     /**
@@ -51,7 +65,7 @@ public class ListDoingAdapter extends RecyclerView.Adapter<ListDoingAdapter.View
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Task task = doingList.get(position);
-        holder.bind(task, listener);
+        holder.bind(task, position, listener);
     }
 
     @Override
@@ -61,10 +75,18 @@ public class ListDoingAdapter extends RecyclerView.Adapter<ListDoingAdapter.View
 
     public void refreshList(final List<Task> doingList) {
         this.doingList = doingList;
+        this.lastPosition = doingList.size() - 1;
         notifyDataSetChanged();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public void removeLastPosition() {
+        lastPosition = lastPosition - 1;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.layout_doing_task)
+        ConstraintLayout layoutDoing;
 
         @BindView(R.id.text_doing_task)
         EditText txtDoingTask;
@@ -80,10 +102,17 @@ public class ListDoingAdapter extends RecyclerView.Adapter<ListDoingAdapter.View
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(final Task task, final ListDoingListener listener) {
+        public void bind(final Task task, final int position, final ListDoingListener listener) {
 
             txtDoingTask.setText(task.getName());
             checkDoingTask.setChecked(false);
+
+            if (position > lastPosition) {
+                blinkBackground(layoutDoing,
+                        context.getResources().getColor(R.color.opacityBlue),
+                        context.getResources().getColor(R.color.white));
+                lastPosition = position;
+            }
 
             if (task.isImportant()) {
                 importantDoingTask.setBackgroundResource(R.drawable.ic_star_full);
@@ -111,9 +140,13 @@ public class ListDoingAdapter extends RecyclerView.Adapter<ListDoingAdapter.View
             importantDoingTask.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View view) {
+
                     task.setImportant(!task.isImportant());
                     if (task.isImportant()) {
                         importantDoingTask.setBackgroundResource(R.drawable.ic_star_full);
+                        animateView(layoutDoing,
+                                context.getResources().getColor(R.color.opacityYellow),
+                                context.getResources().getColor(R.color.white));
                     } else {
                         importantDoingTask.setBackgroundResource(R.drawable.ic_star_empty);
                     }
