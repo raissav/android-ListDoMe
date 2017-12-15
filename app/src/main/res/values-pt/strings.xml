@@ -1,21 +1,53 @@
 <resources>
     <string name="app_name">ListDo.Me</string>
 
-    <string name="title_tasks">Tarefas Diárias - %1$s</string>
+    <!-- TITLE -->
+    <string name="title_tasks">Tarefas Diárias</string>
     <string name="title_ideas">Ideais</string>
     <string name="title_calendar">Calendário</string>
     <string name="title_analysis">Análise</string>
 
+    <!-- MENU -->
     <string name="title_menu_tasks">Tarefas</string>
     <string name="title_menu_ideas">Ideais</string>
     <string name="title_menu_calendar">Calendário</string>
     <string name="title_menu_analysis">Análise</string>
 
+    <!-- TASKS -->
     <string name="task_list_error">Não foi possível carregar os dados das tarefas. Tente novamente.</string>
-
+    <string name="task_add_hint">Nova Tarefa</string>
+    <string name="task_list_hint">Tarefa</string>
+    <string name="task_card_todo">TO-DO</string>
+    <string name="task_card_doing">DOING</string>
+    <string name="task_card_done">DONE</string>
     <string name="remove_task_dialog_title">Remover Tarefa?</string>
     <string name="remove_task_dialog_message">Tem certeza que deseja remover a tarefa?</string>
-
     <string name="stop_task_dialog_title">Parar Tarefa?</string>
     <string name="stop_task_dialog_message">Tem certeza que deseja parar a tarefa?</string>
+    <string name="no_tasks_available">Nenhuma tarefa %1$s…</string>
+    <string name="doing">em progresso</string>
+    <string name="done">concluída</string>
+
+    <!-- ANALYSIS -->
+    <string name="analysis_card_no_result">Não foi possível calcular</string>
+    <string name="analysis_card_productivity">PRODUTIVIDADE %1$s</string>
+    <string name="daily">DIÁRIA</string>
+    <string name="weekly">SEMANAL</string>
+    <string name="monthly">MENSAL</string>
+
+    <plurals name="analysis_card_tasks_daily">
+        <item quantity="one">%d tarefa / dia</item>
+        <item quantity="other">%d tarefas / dia</item>
+    </plurals>
+
+    <plurals name="analysis_card_tasks_weekly">
+        <item quantity="one">%d tarefa / semana</item>
+        <item quantity="other">%d tarefas / semana</item>
+    </plurals>
+
+    <plurals name="analysis_card_tasks_monthly">
+        <item quantity="one">%d tarefa / mês</item>
+        <item quantity="other">%d tarefas / mês</item>
+    </plurals>
+
 </resources>

@@ -9,8 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.listdome.app.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     protected BottomNavigationView navigationView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
         ButterKnife.bind(this);
@@ -83,7 +88,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getMenuItemTitle());
-        //toolbar.setLogo(R.mipmap.ic_logo);
+
+        final SimpleDateFormat format = new SimpleDateFormat("  dd, MMM yyyy", Locale.US);
+        final String date = format.format(new Date());
+        getSupportActionBar().setSubtitle(date);
+
         navigationView.setOnNavigationItemSelectedListener(this);
     }
 

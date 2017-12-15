@@ -7,5 +7,5 @@
     android:layout_height="wrap_content"
     app:itemIconTint="@color/colorPrimaryDark"
     app:itemTextColor="@color/colorPrimaryDark"
-    android:background="?android:attr/windowBackground"
+    android:background="@color/white"
     app:menu="@menu/navigation" />

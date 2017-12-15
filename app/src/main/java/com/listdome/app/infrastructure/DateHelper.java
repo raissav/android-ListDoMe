@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -47,4 +48,39 @@ public final class DateHelper {
         return dateStr;
     }
 
+    public static Date getWeekDateBegin() {
+
+        final Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_WEEK,
+                cal.getActualMinimum(Calendar.DAY_OF_WEEK));
+
+        return cal.getTime();
+    }
+
+    public static Date getWeekDateEnd() {
+
+        final Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_WEEK,
+                cal.getActualMaximum(Calendar.DAY_OF_WEEK));
+
+        return cal.getTime();
+    }
+
+    public static Date getMonthDateBegin() {
+
+        final Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH,
+                cal.getActualMinimum(Calendar.DAY_OF_MONTH));
+
+        return cal.getTime();
+    }
+
+    public static Date getMonthDateEnd() {
+
+        final Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH,
+                cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+        return cal.getTime();
+    }
 }

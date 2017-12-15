@@ -26,9 +26,11 @@
         app:layout_constraintBaseline_toBaselineOf="@id/check_doing_task"
         app:layout_constraintStart_toEndOf="@id/check_doing_task"
         app:layout_constraintEnd_toStartOf="@+id/important_doing_task"
-        android:hint="Task"
+        android:hint="@string/task_list_hint"
         android:textSize="18sp"
         android:inputType="text"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
         android:maxLines="1" />
 
     <ImageButton

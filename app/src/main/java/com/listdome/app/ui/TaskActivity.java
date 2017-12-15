@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -54,7 +55,7 @@ public class TaskActivity extends BaseActivity {
     protected CardView cardDone;
 
     @BindView(R.id.new_task)
-    protected EditText txtNewText;
+    protected EditText txtNewTask;
 
     @BindView(R.id.add_task)
     protected ImageButton btnAddTask;
@@ -68,8 +69,11 @@ public class TaskActivity extends BaseActivity {
     @BindView(R.id.list_done)
     protected RecyclerView recyclerListDone;
 
-    @BindView(R.id.progress_bar)
-    protected ProgressBar progressBar;
+    @BindView(R.id.empty_view_doing)
+    protected TextView emptyDoing;
+
+    @BindView(R.id.empty_view_done)
+    protected TextView emptyDone;
 
     protected ListToDoAdapter listToDoAdapter;
     protected ListDoingAdapter listDoingAdapter;
@@ -93,12 +97,7 @@ public class TaskActivity extends BaseActivity {
 
     @Override
     protected String getMenuItemTitle() {
-        Log.v(TAG, "[method] getMenuItemTitle");
-
-        final SimpleDateFormat format = new SimpleDateFormat("  dd, MMM yyyy", Locale.US);
-        final String date = format.format(new Date());
-
-        return getString(R.string.title_tasks, date);
+        return getString(R.string.title_tasks);
     }
 
     @Override
@@ -107,11 +106,13 @@ public class TaskActivity extends BaseActivity {
 
         mTaskManager = new TaskManager(this);
 
-        hideCards();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        txtNewTask.clearFocus();
+
         setRecyclerViews();
         setAdapters();
         getTaskLists();
+        showCards();
     }
 
     @Override
@@ -131,15 +132,15 @@ public class TaskActivity extends BaseActivity {
 
         final LinearLayoutManager lmToDoList = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerListToDo.setLayoutManager(lmToDoList);
-        recyclerListToDo.setHasFixedSize(true);
+        recyclerListToDo.setHasFixedSize(false);
 
         final LinearLayoutManager lmDoingList = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerListDoing.setLayoutManager(lmDoingList);
-        recyclerListDoing.setHasFixedSize(true);
+        recyclerListDoing.setHasFixedSize(false);
 
         final LinearLayoutManager lmDoneList = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerListDone.setLayoutManager(lmDoneList);
-        recyclerListDone.setHasFixedSize(true);
+        recyclerListDone.setHasFixedSize(false);
     }
 
     /**
@@ -162,7 +163,7 @@ public class TaskActivity extends BaseActivity {
             @Override
             public void onTaskItemLongClick(final Task task) {
                 Log.v(TAG, "[method] onTaskItemLongClick");
-                hideKeyboard(txtNewText);
+                hideKeyboard(txtNewTask);
                 showRemoveTaskDialog(task, TaskStatus.TODO);
             }
 
@@ -192,7 +193,7 @@ public class TaskActivity extends BaseActivity {
             @Override
             public void onTaskItemLongClick(final Task task) {
                 Log.v(TAG, "[method] onTaskItemLongClick");
-                hideKeyboard(txtNewText);
+                hideKeyboard(txtNewTask);
                 showStopTaskDialog(task);
             }
 
@@ -222,7 +223,7 @@ public class TaskActivity extends BaseActivity {
             @Override
             public void onTaskItemLongClick(final Task task) {
                 Log.v(TAG, "[method] onTaskItemLongClick");
-                hideKeyboard(txtNewText);
+                hideKeyboard(txtNewTask);
                 showRemoveTaskDialog(task, TaskStatus.DONE);
             }
 
@@ -245,8 +246,6 @@ public class TaskActivity extends BaseActivity {
     private void saveTask(final Task newTask) {
         Log.v(TAG, "[method] saveTask");
 
-        progressBar.setVisibility(View.VISIBLE);
-
         mTaskManager.saveTask(newTask, new OperationListener<Long>() {
 
             @Override
@@ -264,7 +263,6 @@ public class TaskActivity extends BaseActivity {
                 Log.v(TAG, "[condition] onError");
                 super.onError(errors);
 
-                progressBar.setVisibility(View.GONE);
                 generateToast(getString(R.string.task_list_error));
             }
         });
@@ -278,8 +276,6 @@ public class TaskActivity extends BaseActivity {
     private void updateTask(final Task task) {
         Log.v(TAG, "[method] updateTask");
 
-        progressBar.setVisibility(View.VISIBLE);
-
         mTaskManager.updateTask(task, new OperationListener<Boolean>() {
 
             @Override
@@ -288,9 +284,6 @@ public class TaskActivity extends BaseActivity {
                 super.onSuccess(result);
 
                 getTaskLists();
-                listToDoAdapter.notifyDataSetChanged();
-                listDoingAdapter.notifyDataSetChanged();
-                listDoneAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -298,7 +291,6 @@ public class TaskActivity extends BaseActivity {
                 Log.v(TAG, "[condition] onError");
                 super.onError(errors);
 
-                progressBar.setVisibility(View.GONE);
                 generateToast(getString(R.string.task_list_error));
             }
         });
@@ -311,8 +303,6 @@ public class TaskActivity extends BaseActivity {
      */
     private void deleteTask(final Task task, final TaskStatus status) {
         Log.v(TAG, "[method] deleteTask");
-
-        progressBar.setVisibility(View.VISIBLE);
 
         mTaskManager.deleteTask(task, new OperationListener<Boolean>() {
 
@@ -336,7 +326,6 @@ public class TaskActivity extends BaseActivity {
                 Log.v(TAG, "[condition] onError");
                 super.onError(errors);
 
-                progressBar.setVisibility(View.GONE);
                 generateToast(getString(R.string.task_list_error));
             }
         });
@@ -348,8 +337,6 @@ public class TaskActivity extends BaseActivity {
     private void getTaskLists() {
         Log.v(TAG, "[method] getTaskLists");
 
-        progressBar.setVisibility(View.VISIBLE);
-
         mTaskManager.getTasks(new OperationListener<List<Task>>() {
 
             @Override
@@ -358,7 +345,7 @@ public class TaskActivity extends BaseActivity {
                 super.onSuccess(result);
 
                 processTaskList(result);
-                showCards();
+                txtNewTask.clearFocus();
             }
 
             @Override
@@ -366,7 +353,6 @@ public class TaskActivity extends BaseActivity {
                 Log.v(TAG, "[condition] onError");
                 super.onError(errors);
 
-                showCards();
                 generateToast(getString(R.string.task_list_error));
             }
         });
@@ -380,9 +366,9 @@ public class TaskActivity extends BaseActivity {
     private void processTaskList(final List<Task> tasks) {
         Log.v(TAG, "[method] processTaskList: " + tasks.size());
 
-        toDoList = new ArrayList<>();
-        doingList = new ArrayList<>();
-        doneList = new ArrayList<>();
+        toDoList.clear();
+        doingList.clear();
+        doneList.clear();
 
         for (final Task task : tasks) {
             if (task.getStatus() == TaskStatus.TODO) {
@@ -394,9 +380,31 @@ public class TaskActivity extends BaseActivity {
             }
         }
 
+        verifyEmptyLists();
+
         listToDoAdapter.refreshList(toDoList);
         listDoingAdapter.refreshList(doingList);
         listDoneAdapter.refreshList(doneList);
+    }
+
+    /**
+     * Checks if the lists are empty.
+     * If so, shows an empty result message.
+     */
+    private void verifyEmptyLists() {
+        if (doingList.isEmpty()) {
+            emptyDoing.setText(getString(R.string.no_tasks_available, getString(R.string.doing)));
+            emptyDoing.setVisibility(View.VISIBLE);
+        } else {
+            emptyDoing.setVisibility(View.GONE);
+        }
+
+        if (doneList.isEmpty()) {
+            emptyDone.setText(getString(R.string.no_tasks_available, getString(R.string.done)));
+            emptyDone.setVisibility(View.VISIBLE);
+        } else {
+            emptyDone.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -410,19 +418,9 @@ public class TaskActivity extends BaseActivity {
     }
 
     /**
-     * Change visibility of all cards (lists) to hide
-     */
-    private void hideCards() {
-        cardToDo.setVisibility(View.GONE);
-        cardDoing.setVisibility(View.GONE);
-        cardDone.setVisibility(View.GONE);
-    }
-
-    /**
      * Change visibility of all cards (lists) to show
      */
     private void showCards() {
-        progressBar.setVisibility(View.GONE);
         cardToDo.setVisibility(View.VISIBLE);
         cardDoing.setVisibility(View.VISIBLE);
         cardDone.setVisibility(View.VISIBLE);
@@ -491,16 +489,16 @@ public class TaskActivity extends BaseActivity {
     void onAddTaskClick() {
         Log.v(TAG, "[method] onAddTaskClick");
 
-        if (txtNewText.getText() !=  null && !txtNewText.getText().toString().trim().isEmpty()) {
+        if (txtNewTask.getText() !=  null && !txtNewTask.getText().toString().trim().isEmpty()) {
             final Task task = new Task();
             task.setDateBegin(new Date());
             task.setDateEnd(null);
             task.setImportant(false);
             task.setStatus(TaskStatus.TODO);
-            task.setName(txtNewText.getText().toString());
+            task.setName(txtNewTask.getText().toString());
 
-            txtNewText.setText("");
-            txtNewText.clearFocus();
+            txtNewTask.setText("");
+            txtNewTask.clearFocus();
 
             saveTask(task);
         }

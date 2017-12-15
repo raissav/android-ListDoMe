@@ -15,6 +15,7 @@ import com.listdome.app.infrastructure.Constants.Database;
 import com.listdome.app.infrastructure.DateHelper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -82,6 +83,36 @@ public class TaskDao extends BaseDao<Task> {
                             TaskTable.IMPORTANT +
                             Database.ORDER_BY_DESC,                 // order by
                     null);                                    // limit
+
+            result = getTaskList(cursor);
+
+        } finally {
+            closeDB();
+        }
+
+        return result;
+    }
+
+    public List<Task> getTasksByStatusInterval(final TaskStatus status, final Date begin, final Date end) {
+        Log.v(TAG, "[method] getTasksByStatusInterval - status: " + status);
+
+        List<Task> result = new ArrayList<>();
+
+        final SQLiteDatabase db = getDBForRead();
+
+        try {
+            final Cursor cursor = db.query(
+                    TaskTable.TABLE_NAME,                                       // table
+                    TaskTable.getAllColumns(),                                  // column names
+                    (TaskTable.STATUS + " = ? AND " +
+                    TaskTable.DATE_END + " BETWEEN ? AND ?"),                   // selection
+                    new String[]{status.getId().toString(),                     // selections values
+                    DateHelper.parseDateToString(begin, DateHelper.patternEn),
+                    DateHelper.parseDateToString(end, DateHelper.patternEn)},
+                    null,                                              // group by
+                    null,                                               // having
+                    null,                                              // order by
+                    null);                                               // limit
 
             result = getTaskList(cursor);
 
