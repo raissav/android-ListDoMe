@@ -24,7 +24,7 @@
     <string name="remove_task_dialog_message">Tem certeza que deseja remover a tarefa?</string>
     <string name="stop_task_dialog_title">Parar Tarefa?</string>
     <string name="stop_task_dialog_message">Tem certeza que deseja parar a tarefa?</string>
-    <string name="no_tasks_available">Nenhuma tarefa %1$s…</string>
+    <string name="no_tasks_available">Nenhuma tarefa %1$s hoje…</string>
     <string name="doing">em progresso</string>
     <string name="done">concluída</string>
 

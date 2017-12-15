@@ -13,7 +13,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +30,9 @@ import com.listdome.app.ui.adapter.ListDoingAdapter;
 import com.listdome.app.ui.adapter.ListDoneAdapter;
 import com.listdome.app.ui.adapter.ListToDoAdapter;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by raissa on 21/11/2017.
@@ -131,16 +128,19 @@ public class TaskActivity extends BaseActivity {
         Log.v(TAG, "[method] setRecyclerViews");
 
         final LinearLayoutManager lmToDoList = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        lmToDoList.setMeasurementCacheEnabled(false);
         recyclerListToDo.setLayoutManager(lmToDoList);
-        recyclerListToDo.setHasFixedSize(false);
+        recyclerListToDo.setHasFixedSize(true);
 
         final LinearLayoutManager lmDoingList = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        lmDoingList.setMeasurementCacheEnabled(false);
         recyclerListDoing.setLayoutManager(lmDoingList);
-        recyclerListDoing.setHasFixedSize(false);
+        recyclerListDoing.setHasFixedSize(true);
 
         final LinearLayoutManager lmDoneList = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        lmDoneList.setMeasurementCacheEnabled(false);
         recyclerListDone.setLayoutManager(lmDoneList);
-        recyclerListDone.setHasFixedSize(false);
+        recyclerListDone.setHasFixedSize(true);
     }
 
     /**
@@ -170,13 +170,13 @@ public class TaskActivity extends BaseActivity {
             @Override
             public void onCheckItemClick(final Task task) {
                 Log.v(TAG, "[method] onCheckItemClick");
-                updateTask(task);
+                updateTask(task, TaskStatus.TODO);
             }
 
             @Override
             public void onImportantItemClick(final Task task) {
                 Log.v(TAG, "[method] onImportantItemClick");
-                updateTask(task);
+                updateTask(task, null);
             }
         });
 
@@ -200,13 +200,13 @@ public class TaskActivity extends BaseActivity {
             @Override
             public void onCheckItemClick(final Task task) {
                 Log.v(TAG, "[method] onCheckItemClick");
-                updateTask(task);
+                updateTask(task, TaskStatus.DOING);
             }
 
             @Override
             public void onImportantItemClick(final Task task) {
                 Log.v(TAG, "[method] onImportantItemClick");
-                updateTask(task);
+                updateTask(task, null);
             }
         });
 
@@ -230,7 +230,7 @@ public class TaskActivity extends BaseActivity {
             @Override
             public void onCheckItemClick(final Task task) {
                 Log.v(TAG, "[method] onCheckItemClick");
-                updateTask(task);
+                updateTask(task, TaskStatus.DONE);
             }
 
         });
@@ -272,8 +272,9 @@ public class TaskActivity extends BaseActivity {
      * Update task in DB.
      *
      * @param task - task to be updated
+     * @param status - the previous task status
      */
-    private void updateTask(final Task task) {
+    private void updateTask(final Task task, final TaskStatus status) {
         Log.v(TAG, "[method] updateTask");
 
         mTaskManager.updateTask(task, new OperationListener<Boolean>() {
@@ -283,7 +284,9 @@ public class TaskActivity extends BaseActivity {
                 Log.v(TAG, "[condition] onSuccess");
                 super.onSuccess(result);
 
-                getTaskLists();
+                if (status != null) {
+                    updateLists(status, task);
+                }
             }
 
             @Override
@@ -294,6 +297,46 @@ public class TaskActivity extends BaseActivity {
                 generateToast(getString(R.string.task_list_error));
             }
         });
+    }
+
+    /**
+     * Updates the lists displayed based on the previous status.
+     *
+     * @param previousStatus
+     * @param task
+     */
+    private void updateLists(final TaskStatus previousStatus, final Task task) {
+        Log.v(TAG, "[method] updateLists");
+
+        if (previousStatus == TaskStatus.TODO) {
+            toDoList.remove(task);
+            listToDoAdapter.notifyDataSetChanged();
+
+            doingList.add(task);
+            listDoingAdapter.notifyDataSetChanged();
+
+        } else if (previousStatus == TaskStatus.DOING) {
+            doingList.remove(task);
+            listDoingAdapter.notifyDataSetChanged();
+
+            if (task.getStatus() == TaskStatus.TODO) {
+                toDoList.add(task);
+                listToDoAdapter.notifyDataSetChanged();
+
+            } else {
+                doneList.add(task);
+                listDoneAdapter.notifyDataSetChanged();
+            }
+
+        } else {
+            doneList.remove(task);
+            listDoneAdapter.notifyDataSetChanged();
+
+            doingList.add(task);
+            listDoingAdapter.notifyDataSetChanged();
+        }
+
+        verifyEmptyLists();
     }
 
     /**
@@ -392,18 +435,24 @@ public class TaskActivity extends BaseActivity {
      * If so, shows an empty result message.
      */
     private void verifyEmptyLists() {
+
+        recyclerListToDo.setVisibility(View.VISIBLE);
+        recyclerListDoing.setVisibility(View.VISIBLE);
+        recyclerListDone.setVisibility(View.VISIBLE);
+
+        emptyDoing.setVisibility(View.GONE);
+        emptyDone.setVisibility(View.GONE);
+
         if (doingList.isEmpty()) {
             emptyDoing.setText(getString(R.string.no_tasks_available, getString(R.string.doing)));
             emptyDoing.setVisibility(View.VISIBLE);
-        } else {
-            emptyDoing.setVisibility(View.GONE);
+            recyclerListDoing.setVisibility(View.GONE);
         }
 
         if (doneList.isEmpty()) {
             emptyDone.setText(getString(R.string.no_tasks_available, getString(R.string.done)));
             emptyDone.setVisibility(View.VISIBLE);
-        } else {
-            emptyDone.setVisibility(View.GONE);
+            recyclerListDone.setVisibility(View.GONE);
         }
     }
 
@@ -472,7 +521,7 @@ public class TaskActivity extends BaseActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         task.setStatus(TaskStatus.TODO);
-                        updateTask(task);
+                        updateTask(task, TaskStatus.DOING);
                         dialog.cancel();
                     }
                 })
