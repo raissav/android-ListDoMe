@@ -42,8 +42,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         setContentView(getContentViewId());
         ButterKnife.bind(this);
 
-        animateTransaction();
         configureToolBarAndNavigationView();
+        animateTransaction();
+        animateToolbar();
         loadElements();
     }
 
@@ -51,7 +52,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     protected void onStart() {
         super.onStart();
         updateNavigationBarState();
+        updateDate();
         animateTransaction();
+        animateToolbar();
+        loadElements();
     }
 
     @Override
@@ -96,18 +100,27 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getMenuItemTitle());
 
+        updateDate();
+
+        navigationView.setOnNavigationItemSelectedListener(this);
+    }
+
+    private void updateDate() {
         final SimpleDateFormat format = new SimpleDateFormat("  dd, MMM yyyy", Locale.US);
         final String date = format.format(new Date());
         getSupportActionBar().setSubtitle(date);
+    }
 
+    /**
+     * Animates the toolbar title and subtitle.
+     */
+    private void animateToolbar() {
         if (toolbar.getChildCount() > 1) {
             final View view0 = toolbar.getChildAt(0);
             SlideAnimationUtils.slideInFromRight(this, view0);
             final View view1 = toolbar.getChildAt(1);
             SlideAnimationUtils.slideInFromRight(this, view1);
         }
-
-        navigationView.setOnNavigationItemSelectedListener(this);
     }
 
     /**

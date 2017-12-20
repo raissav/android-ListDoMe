@@ -531,7 +531,7 @@ public class TaskActivity extends BaseActivity {
 
         builder.setTitle(getString(R.string.stop_task_dialog_title))
                 .setMessage(getString(R.string.stop_task_dialog_message))
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(R.drawable.ic_pause)
 
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
