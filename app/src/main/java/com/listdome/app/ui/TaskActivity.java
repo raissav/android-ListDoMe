@@ -265,6 +265,7 @@ public class TaskActivity extends BaseActivity {
 
                 newTask.setId(result);
                 toDoList.add(newTask);
+                verifyEmptyLists();
                 listToDoAdapter.notifyDataSetChanged();
             }
 
@@ -377,6 +378,7 @@ public class TaskActivity extends BaseActivity {
                     listDoneAdapter.removeLastPosition();
                     listDoneAdapter.notifyDataSetChanged();
                 }
+                verifyEmptyLists();
             }
 
             @Override
@@ -457,6 +459,10 @@ public class TaskActivity extends BaseActivity {
 
         emptyDoing.setVisibility(View.GONE);
         emptyDone.setVisibility(View.GONE);
+
+        if (toDoList.isEmpty()) {
+            recyclerListToDo.setVisibility(View.GONE);
+        }
 
         if (doingList.isEmpty()) {
             emptyDoing.setText(getString(R.string.no_tasks_available, getString(R.string.doing)));

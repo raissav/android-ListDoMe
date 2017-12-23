@@ -1,10 +1,12 @@
-package com.listdome.app;
+package com.listdome.app.ui;
 
 import android.os.SystemClock;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.listdome.app.R;
 import com.listdome.app.ui.SplashActivity;
 
 import org.junit.Rule;
@@ -19,7 +21,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class SplashFeature {
+public class SplashActivityTest {
 
     @Rule
     public ActivityTestRule<SplashActivity> mActivityRule =
@@ -28,7 +30,7 @@ public class SplashFeature {
     @Test
     public void validateFields() {
         SystemClock.sleep(500);
-        onView(withId(R.id.splash_logo_name)).check(matches(isDisplayed()));
+        onView(ViewMatchers.withId(R.id.splash_logo_name)).check(matches(isDisplayed()));
         onView(withId(R.id.splash_logo_img)).check(matches(isDisplayed()));
     }
 }

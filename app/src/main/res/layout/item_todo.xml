@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:contentDescription="@string/task_add_hint"
         app:layout_constraintBaseline_toBaselineOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/text_todo_task"
         app:layout_constraintStart_toStartOf="parent"  />
@@ -30,7 +31,7 @@
         android:hint="@string/task_list_hint"
         android:textSize="18sp"
         android:inputType="text"
-        android:focusable="false"
+        android:focusable="true"
         android:focusableInTouchMode="true"
         android:maxLines="1" />
 

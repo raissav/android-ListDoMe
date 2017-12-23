@@ -3,9 +3,9 @@
 
     <!-- TITLE -->
     <string name="title_tasks">Daily Tasks</string>
-    <string name="title_ideas">Ideas</string>
+    <string name="title_ideas">Inspiring Ideas</string>
     <string name="title_calendar">Calendar</string>
-    <string name="title_analysis">Analysis</string>
+    <string name="title_analysis">Productivity Analysis</string>
 
     <!-- MENU -->
     <string name="title_menu_tasks">Tasks</string>
@@ -27,6 +27,7 @@
     <string name="no_tasks_available">No tasks %1$s today…</string>
     <string name="doing">in progress</string>
     <string name="done">done</string>
+    <string name="check_todo_task">check_todo_task</string>
 
     <!-- ANALYSIS -->
     <string name="analysis_card_no_result">Unable to calculate</string>

@@ -52,7 +52,8 @@
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
 
                     <TextView
                         android:id="@+id/title_todo"
@@ -100,6 +101,7 @@
                         android:layout_margin="5dp"
                         android:layout_gravity="center"
                         android:scrollbars="vertical"
+                        android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@id/new_task"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:listitem="@layout/item_todo" />
@@ -142,6 +144,7 @@
                         android:layout_margin="5dp"
                         android:layout_gravity="center"
                         android:scrollbars="vertical"
+                        android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@id/title_doing"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:listitem="@layout/item_doing" />
@@ -150,7 +153,7 @@
                         android:id="@+id/empty_view_doing"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         app:layout_constraintTop_toBottomOf="@id/title_doing"
                         app:layout_constraintStart_toStartOf="parent"
                         android:padding="15dp"
@@ -195,6 +198,7 @@
                         android:layout_margin="5dp"
                         android:layout_gravity="center"
                         android:scrollbars="vertical"
+                        android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@id/title_done"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:listitem="@layout/item_doing" />
