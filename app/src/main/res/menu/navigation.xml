@@ -11,11 +11,6 @@
         android:icon="@drawable/ic_idea"
         android:title="@string/title_menu_ideas" />
 
-    <!--item
-        android:id="@+id/navigation_calendar"
-        android:icon="@drawable/ic_calendar"
-        android:title="@string/title_menu_calendar" /-->
-
     <item
         android:id="@+id/navigation_analysis"
         android:icon="@drawable/ic_analysis"

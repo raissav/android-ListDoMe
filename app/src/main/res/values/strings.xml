@@ -4,13 +4,11 @@
     <!-- TITLE -->
     <string name="title_tasks">Daily Tasks</string>
     <string name="title_ideas">Inspiring Ideas</string>
-    <string name="title_calendar">Calendar</string>
-    <string name="title_analysis">Productivity Analysis</string>
+    <string name="title_analysis">Progress Analysis</string>
 
     <!-- MENU -->
     <string name="title_menu_tasks">Tasks</string>
     <string name="title_menu_ideas">Ideas</string>
-    <string name="title_menu_calendar">Calendar</string>
     <string name="title_menu_analysis">Analysis</string>
 
     <!-- TASKS -->
