@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:id="@+id/layout_ideas">
+
+    <ImageView
+        android:id="@+id/new_idea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_item_idea"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBaseline_toBaselineOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/text_idea"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/idea_list_hint" />
+
+    <EditText
+        android:id="@+id/text_idea"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@null"
+        android:padding="5dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/new_idea"
+        app:layout_constraintStart_toEndOf="@id/new_idea"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/idea_list_hint"
+        android:textSize="18sp"
+        android:inputType="text"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:maxLines="1" />
+
+</android.support.constraint.ConstraintLayout>

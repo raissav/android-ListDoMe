@@ -26,6 +26,16 @@
     <string name="doing">em progresso</string>
     <string name="done">concluída</string>
 
+    <!-- IDEAS -->
+    <string name="ideas_list_error">Não foi possível carregar os dados das ideias. Tente novamente.</string>
+    <string name="ideas_card_inspiration">INSPIRAÇÃO DIÁRIA</string>
+    <string name="idea_inspiration_hint">A inspiração do dia é…</string>
+    <string name="ideas_card_list">LISTA DE IDEIAS</string>
+    <string name="idea_add_hint">Nova Ideia</string>
+    <string name="idea_list_hint">Ideia</string>
+    <string name="remove_idea_dialog_title">Remover Ideia?</string>
+    <string name="remove_idea_dialog_message">Tem certeza que deseja remover a ideia?</string>
+
     <!-- ANALYSIS -->
     <string name="analysis_card_no_result">Não foi possível calcular</string>
     <string name="analysis_card_productivity">PRODUTIVIDADE %1$s</string>

@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.listdome.app.gateway.database.tables.IdeaTable;
 import com.listdome.app.gateway.database.tables.TaskTable;
 
 /**
@@ -27,6 +28,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onCreate(final SQLiteDatabase sqLiteDatabase) {
         Log.v(TAG, "[method] onCreate");
         sqLiteDatabase.execSQL(TaskTable.SQL_CREATE);
+        sqLiteDatabase.execSQL(IdeaTable.SQL_CREATE);
     }
 
     @Override

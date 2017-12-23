@@ -1,6 +1,5 @@
 package com.listdome.app.ui;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -10,16 +9,13 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.OnFocusChange;
 
 import com.listdome.app.R;
 import com.listdome.app.entity.Task;
@@ -109,7 +105,7 @@ public class TaskActivity extends BaseActivity {
         mTaskManager = new TaskManager(this);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        txtNewTask.clearFocus();
+        txtNewTask.requestFocus();
 
         setRecyclerViews();
         setAdapters();
@@ -187,6 +183,17 @@ public class TaskActivity extends BaseActivity {
             public void onImportantItemClick(final Task task) {
                 Log.v(TAG, "[method] onImportantItemClick");
                 updateTask(task, null);
+            }
+
+            @Override
+            public void onFocusChange(final Task task) {
+                Log.v(TAG, "[method] onFocusChange");
+
+                if (task.getName().trim().isEmpty()) {
+                    deleteTask(task, TaskStatus.TODO);
+                } else {
+                    updateTask(task, null);
+                }
             }
         });
 
@@ -574,28 +581,4 @@ public class TaskActivity extends BaseActivity {
         }
     }
 
-    @OnFocusChange(R.id.new_task)
-    void onFocusChange(final View v, final boolean hasFocus) {
-        if (v.getId() == R.id.new_task && !hasFocus) {
-            hideKeyboard(v);
-        }
-    }
-
-    private void hideKeyboard(final View v) {
-        final InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-    }
-
-    /**
-     * Generates Toast.
-     *
-     * @param message
-     */
-    private void generateToast(final String message) {
-        Log.v(TAG, "[method] generateToast");
-
-        int duration = Toast.LENGTH_LONG;
-        final Toast toast = Toast.makeText(this, message, duration);
-        toast.show();
-    }
 }

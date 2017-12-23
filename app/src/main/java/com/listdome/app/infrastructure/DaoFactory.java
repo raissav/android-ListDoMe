@@ -2,6 +2,7 @@ package com.listdome.app.infrastructure;
 
 import android.content.Context;
 
+import com.listdome.app.gateway.database.dao.IdeaDao;
 import com.listdome.app.gateway.database.dao.TaskDao;
 
 /**
@@ -21,5 +22,9 @@ public final class DaoFactory {
 
     public TaskDao createTaskDAO(final Context context) {
         return new TaskDao(context);
+    }
+
+    public IdeaDao createIdeaDAO(final Context context) {
+        return new IdeaDao(context);
     }
 }

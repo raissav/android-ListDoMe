@@ -47,6 +47,7 @@ public class ListToDoAdapter extends RecyclerView.Adapter<ListToDoAdapter.ViewHo
         void onTaskItemLongClick(final Task task);
         void onCheckItemClick(final Task task);
         void onImportantItemClick(final Task task);
+        void onFocusChange(final Task task);
     }
 
     @Override
@@ -99,6 +100,7 @@ public class ListToDoAdapter extends RecyclerView.Adapter<ListToDoAdapter.ViewHo
         public void bind(final Task task, final int position, final ListToDoListener listener) {
 
             txtToDoTask.setText(task.getName());
+            txtToDoTask.clearFocus();
             checkToDoTask.setChecked(false);
 
             if (task.isImportant()) {
@@ -119,6 +121,16 @@ public class ListToDoAdapter extends RecyclerView.Adapter<ListToDoAdapter.ViewHo
                 public boolean onLongClick(final View view) {
                     listener.onTaskItemLongClick(task);
                     return false;
+                }
+            });
+
+            txtToDoTask.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        task.setName(txtToDoTask.getText().toString());
+                        listener.onFocusChange(task);
+                    }
                 }
             });
 
