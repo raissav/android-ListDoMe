@@ -13,7 +13,7 @@
     android:id="@+id/layout_ideas">
 
     <ImageView
-        android:id="@+id/new_idea"
+        android:id="@+id/marker_idea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_item_idea"
@@ -31,8 +31,8 @@
         android:background="@null"
         android:paddingTop="2dp"
         android:paddingBottom="5dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/new_idea"
-        app:layout_constraintStart_toEndOf="@id/new_idea"
+        app:layout_constraintBaseline_toBaselineOf="@id/marker_idea"
+        app:layout_constraintStart_toEndOf="@id/marker_idea"
         app:layout_constraintEnd_toEndOf="parent"
         android:hint="@string/idea_list_hint"
         android:textSize="18sp"

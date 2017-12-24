@@ -1,14 +1,12 @@
 package com.listdome.app.ui;
 
 import android.os.SystemClock;
-import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.listdome.app.R;
 import com.listdome.app.gateway.database.dao.TaskDao;
-import com.listdome.app.helpers.CustomMatches;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,22 +15,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
-import static android.support.test.espresso.matcher.ViewMatchers.hasTextColor;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.listdome.app.helpers.BaseHelper.addTask;
 import static com.listdome.app.helpers.BaseHelper.clickBottomNavigationMenu;
-import static com.listdome.app.helpers.BaseHelper.confirmDialog;
 import static com.listdome.app.helpers.BaseHelper.validateAnalysisCard;
-import static com.listdome.app.helpers.BaseHelper.validateBottomNavigationMenu;
-import static com.listdome.app.helpers.BaseHelper.validateEmptyCard;
-import static com.listdome.app.helpers.BaseHelper.validateListCard;
 import static com.listdome.app.helpers.BaseHelper.validateToolbar;
-import static org.hamcrest.Matchers.not;
 
 
 @RunWith(AndroidJUnit4.class)

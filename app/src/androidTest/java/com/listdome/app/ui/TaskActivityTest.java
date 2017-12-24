@@ -22,7 +22,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static com.listdome.app.helpers.BaseHelper.addTask;
+import static com.listdome.app.helpers.BaseHelper.addItem;
 import static com.listdome.app.helpers.BaseHelper.confirmDialog;
 import static com.listdome.app.helpers.BaseHelper.validateBottomNavigationMenu;
 import static com.listdome.app.helpers.BaseHelper.validateEmptyCard;
@@ -96,8 +96,8 @@ public class TaskActivityTest {
         SystemClock.sleep(1000);
 
         //Add 2 tasks
-        addTask("Task 1");
-        addTask("Task 2");
+        addItem("Task 1", R.id.new_task, R.id.add_task);
+        addItem("Task 1", R.id.new_task, R.id.add_task);
 
         //Validate list size
         validateListCard(R.id.list_todo, R.id.check_todo_task, R.id.text_todo_task,

@@ -100,6 +100,22 @@ public class BaseHelper {
         }
     }
 
+    public static void validateListCard(final int listId, final int iconId, final int taskTextId,
+                                        final int listSize) {
+
+        onView(withId(listId)).check(matches(isDisplayed()));
+        onView(withId(listId)).check(matches(CustomMatches.withRecyclerCount(listSize)));
+
+        for (int i = 0; i < listSize; i++) {
+            onView(withId(listId)).perform(scrollToPosition(i));
+
+            onView(withRecyclerView(listId).atPosition(i))
+                    .check(matches(hasDescendant(withId(iconId))));
+            onView(withRecyclerView(listId).atPosition(i))
+                    .check(matches(hasDescendant(withId(taskTextId))));
+        }
+    }
+
     public static void validateAnalysisCard(final int cardId, final int titleId, final int valueId,
                                             final String title, final String value) {
 
@@ -113,14 +129,27 @@ public class BaseHelper {
         onView(withId(valueId)).check(matches(withText("0 tasks / " + value)));
     }
 
-    public static void addTask(final String task) {
+    public static void validateInspirationCard(final int cardId, final int titleId, final int valueId,
+                                            final int titleTextId, final int buttonId) {
 
-        onView(withId(R.id.new_task)).perform(click());
-        final ViewInteraction textInputSearchFilterText = onView(withId(R.id.new_task));
-        textInputSearchFilterText.perform(replaceText(task), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.new_task)).check(matches(withText(task)));
-        onView(withId(R.id.add_task)).perform(click());
-        onView(withId(R.id.new_task)).check(matches(withText("")));
+        onView(withId(cardId)).check(matches(isDisplayed()));
+
+        onView(withId(titleId)).check(matches(isDisplayed()));
+        onView(withId(titleId)).check(matches(withText(titleTextId)));
+        onView(withId(titleId)).check(matches(hasTextColor(R.color.lightGrey)));
+
+        onView(withId(valueId)).check(matches(isDisplayed()));
+        onView(withId(buttonId)).check(matches(isDisplayed()));
+    }
+
+    public static void addItem(final String text, final int newItemId, final int addButtonId) {
+
+        onView(withId(newItemId)).perform(click());
+        final ViewInteraction textInputSearchFilterText = onView(withId(newItemId));
+        textInputSearchFilterText.perform(replaceText(text), ViewActions.closeSoftKeyboard());
+        onView(withId(newItemId)).check(matches(withText(text)));
+        onView(withId(addButtonId)).perform(click());
+        onView(withId(newItemId)).check(matches(withText("")));
     }
 
     public static void confirmDialog(final int position, final int listId, final int textClickId,
