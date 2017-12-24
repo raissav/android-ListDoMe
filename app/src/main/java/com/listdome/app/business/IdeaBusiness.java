@@ -36,7 +36,7 @@ public class IdeaBusiness extends BaseBusiness {
         final OperationResult<Idea> result = new OperationResult<>();
 
         final Idea idea = new Idea();
-        idea.setName("Inspiração de hoje!");
+        idea.setName("The most important investment you can make is in yourself.");
         idea.setDateCreate(new Date());
 
         result.setResult(idea);

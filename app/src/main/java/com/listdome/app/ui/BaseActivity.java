@@ -15,10 +15,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.listdome.app.R;
+import com.listdome.app.infrastructure.Constants;
 import com.listdome.app.ui.utils.SlideAnimationUtils;
 
 import java.text.SimpleDateFormat;
@@ -42,12 +43,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     @BindView(R.id.navigation)
     protected BottomNavigationView navigationView;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
         ButterKnife.bind(this);
 
+        loadFirebase();
         configureToolBarAndNavigationView();
         animateTransaction();
         animateToolbar();
@@ -83,14 +87,17 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         switch (item.getItemId()) {
 
             case R.id.navigation_list:
+                logEvent(Constants.Event.OPEN_TASKS, "");
                 startActivity(new Intent(this, TaskActivity.class));
                 return true;
 
             case R.id.navigation_ideas:
+                logEvent(Constants.Event.OPEN_IDEAS, "");
                 startActivity(new Intent(this, IdeasActivity.class));
                 return true;
 
             case R.id.navigation_analysis:
+                logEvent(Constants.Event.OPEN_ANALYTICS, "");
                 startActivity(new Intent(this, AnalysisActivity.class));
                 return true;
         }
@@ -115,6 +122,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     }
 
     /**
+     * Load the Firebase Analytics
+     */
+    private void loadFirebase() {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+    }
+
+    /**
      * Configuration of Toolbar and Bottom Navigation View.
      */
     private void configureToolBarAndNavigationView() {
@@ -128,6 +142,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         navigationView.setOnNavigationItemSelectedListener(this);
     }
 
+    /**
+     * Get the current date to be displayed at the toolbar.
+     */
     private void updateDate() {
         final SimpleDateFormat format = new SimpleDateFormat("  dd, MMM yyyy", Locale.US);
         final String date = format.format(new Date());
@@ -174,7 +191,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         }
     }
 
-
     /**
      * Hide the keyboard
      * @param v
@@ -186,7 +202,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
 
     /**
      * Generates Toast.
-     *
      * @param message
      */
     protected void generateToast(final String message) {
@@ -195,6 +210,19 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         int duration = Toast.LENGTH_LONG;
         final Toast toast = Toast.makeText(this, message, duration);
         toast.show();
+    }
+
+    /**
+     * Log an event at Firebase Analytics.
+     * @param event
+     * @param value
+     */
+    protected void logEvent(final String event, final String value) {
+        Log.v(TAG, "[method] logEvent");
+
+        final Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.VALUE, value);
+        mFirebaseAnalytics.logEvent(event, bundle);
     }
 
     protected abstract int getContentViewId();

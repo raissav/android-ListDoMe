@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#075F8C</color>
     <color name="colorAccent">#97B3E2</color>
     <color name="opacityBlue">#5597B3E2</color>
+    <color name="opacityLightBlue">#3397B3E2</color>
 
     <color name="opacityYellow">#77FCE5AB</color>
     <color name="yellow">#FCE5AB</color>
@@ -12,6 +13,7 @@
     <color name="lightGrey">#F9F9F9</color>
     <color name="lightBlue">#F2F5FC</color>
     <color name="lightSnow">#FCFBF9</color>
+    <color name="lightYellow">#77FFE9B3</color>
 
     <color name="white">#FAFAFA</color>
 </resources>

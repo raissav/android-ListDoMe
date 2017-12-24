@@ -7,8 +7,6 @@ package com.listdome.app.infrastructure;
 public final class Constants {
 
     public static final class Database {
-        private Database() {}
-
         public static final String CREATE_TABLE = "CREATE TABLE ";
         public static final String ALTER_TABLE = "ALTER TABLE ";
         public static final String TABLE_INNER_JOIN = " INNER JOIN ";
@@ -28,8 +26,15 @@ public final class Constants {
     }
 
     public static final class Errors {
-        private Errors() {}
-
         public static final int INVALID_STATUS = 10001;
+    }
+
+    public static final class Event {
+        public static final String OPEN_TASKS = "OPEN_TASKS";
+        public static final String OPEN_IDEAS = "OPEN_IDEAS";
+        public static final String OPEN_ANALYTICS = "OPEN_ANALYTICS";
+        public static final String SAVE_INSPIRATION = "SAVE_INSPIRATION";
+        public static final String NEW_TASK = "NEW_TASK";
+        public static final String NEW_IDEA = "NEW_IDEA";
     }
 }

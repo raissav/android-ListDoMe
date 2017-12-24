@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "691125052537",
+    "firebase_url": "https://android-listdome.firebaseio.com",
+    "project_id": "android-listdome",
+    "storage_bucket": "android-listdome.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691125052537:android:64af9694b80bb6ca",
+        "android_client_info": {
+          "package_name": "com.listdome.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691125052537-8213irt40pvofbcf1fmeqiqi16kcffru.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.listdome.app",
+            "certificate_hash": "0f0effb2d392a3e2dbe08436ae23e2e148e2b836"
+          }
+        },
+        {
+          "client_id": "691125052537-9luc9f3poumhg08tlkn9lbov8q1qc5kq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD6vjzRojlJ14Wvy1WQJtieBDpJdJ41Pg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691125052537-9luc9f3poumhg08tlkn9lbov8q1qc5kq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

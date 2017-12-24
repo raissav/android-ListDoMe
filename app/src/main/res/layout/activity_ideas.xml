@@ -52,7 +52,8 @@
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    android:background="@color/lightYellow">
 
                     <TextView
                         android:id="@+id/title_inspiration"
@@ -70,8 +71,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="18dp"
-                        android:layout_marginRight="25dp"
-                        android:layout_marginEnd="25dp"
+                        android:layout_marginRight="35dp"
+                        android:layout_marginEnd="35dp"
                         android:textSize="18sp"
                         android:layout_gravity="center"
                         android:scrollbars="vertical"

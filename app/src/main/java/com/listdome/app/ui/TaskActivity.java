@@ -20,6 +20,7 @@ import butterknife.OnClick;
 import com.listdome.app.R;
 import com.listdome.app.entity.Task;
 import com.listdome.app.entity.TaskStatus;
+import com.listdome.app.infrastructure.Constants;
 import com.listdome.app.infrastructure.operation.OperationError;
 import com.listdome.app.infrastructure.operation.OperationListener;
 import com.listdome.app.manager.TaskManager;
@@ -274,6 +275,7 @@ public class TaskActivity extends BaseActivity {
                 toDoList.add(newTask);
                 verifyEmptyLists();
                 listToDoAdapter.notifyDataSetChanged();
+                logEvent(Constants.Event.NEW_TASK, newTask.getName());
             }
 
             @Override

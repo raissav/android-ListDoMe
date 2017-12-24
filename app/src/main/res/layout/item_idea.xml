@@ -4,7 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginLeft="5dp"
     android:id="@+id/layout_ideas">
 
     <ImageView
@@ -23,18 +28,16 @@
         android:id="@+id/text_idea"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:background="@null"
-        android:padding="5dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="5dp"
         app:layout_constraintBaseline_toBaselineOf="@id/new_idea"
         app:layout_constraintStart_toEndOf="@id/new_idea"
         app:layout_constraintEnd_toEndOf="parent"
         android:hint="@string/idea_list_hint"
         android:textSize="18sp"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:maxLines="1" />
+        android:focusableInTouchMode="true" />
 
 </android.support.constraint.ConstraintLayout>
