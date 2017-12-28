@@ -28,7 +28,7 @@
     </style>
 
     <style name="NavigationMenuTheme">
-        <item name="colorPrimary">@color/colorPrimaryDark</item>
-        <item name="colorControlHighlight">@color/opacityBlue</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
 </resources>

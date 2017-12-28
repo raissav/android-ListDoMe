@@ -16,7 +16,7 @@
         android:id="@+id/marker_idea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_item_idea"
+        android:background="@drawable/ic_item"
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintBaseline_toBaselineOf="parent"

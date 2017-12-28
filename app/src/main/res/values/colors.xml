@@ -9,6 +9,7 @@
     <color name="opacityYellow">#77FCE5AB</color>
     <color name="yellow">#FCE5AB</color>
     <color name="darkYellow">#FCD571</color>
+    <color name="blue">#256fec</color>
 
     <color name="lightGrey">#F9F9F9</color>
     <color name="lightBlue">#F2F5FC</color>
@@ -16,4 +17,7 @@
     <color name="lightYellow">#77FFE9B3</color>
 
     <color name="white">#FAFAFA</color>
+    <color name="whiteGrey">#F2F2F2</color>
+
+    <color name="blackTint">#6F000000</color>
 </resources>

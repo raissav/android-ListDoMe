@@ -1,14 +1,17 @@
 package com.listdome.app.business;
 
+import android.content.Context;
 import android.util.Log;
 
-import com.listdome.app.R;
 import com.listdome.app.entity.Idea;
 import com.listdome.app.gateway.database.dao.IdeaDao;
+import com.listdome.app.infrastructure.Constants;
 import com.listdome.app.infrastructure.operation.OperationResult;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by raissa on 23/12/2017.
@@ -30,18 +33,30 @@ public class IdeaBusiness extends BaseBusiness {
      *
      * @return the daily inspiration sentence.
      */
-    public OperationResult<Idea> getDailyInspiration() {
+    public OperationResult<Idea> getDailyInspiration(final Context context) {
         Log.v(TAG, "[method] getDailyInspiration");
 
         final OperationResult<Idea> result = new OperationResult<>();
 
         final Idea idea = new Idea();
-        idea.setName("The most important investment you can make is in yourself.");
+        idea.setName(getNextInspiration(context));
         idea.setDateCreate(new Date());
-
         result.setResult(idea);
 
         return result;
+    }
+
+    /**
+     * Get the next inspiration.
+     *
+     * @return the next inspiration string ID.
+     */
+    private String getNextInspiration(final Context context) {
+        final Calendar calendar = Calendar.getInstance();
+        int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
+        final int totalInspirations = Constants.Inspirations.inspirationList.length;
+        final int nextInspiration = Constants.Inspirations.inspirationList[dayOfYear % totalInspirations];
+        return context.getString(nextInspiration);
     }
 
     /**

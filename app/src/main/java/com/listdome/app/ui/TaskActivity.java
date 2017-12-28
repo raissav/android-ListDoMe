@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
 import com.listdome.app.R;
 import com.listdome.app.entity.Task;
 import com.listdome.app.entity.TaskStatus;

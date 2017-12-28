@@ -1,39 +1,30 @@
 package com.listdome.app.ui;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Rect;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.listdome.app.R;
 import com.listdome.app.entity.Idea;
-import com.listdome.app.entity.Task;
-import com.listdome.app.entity.TaskStatus;
 import com.listdome.app.infrastructure.Constants;
 import com.listdome.app.infrastructure.operation.OperationError;
 import com.listdome.app.infrastructure.operation.OperationListener;
 import com.listdome.app.manager.IdeaManager;
-import com.listdome.app.manager.TaskManager;
 import com.listdome.app.ui.adapter.ListIdeaAdapter;
-import com.listdome.app.ui.adapter.ListToDoAdapter;
 import com.listdome.app.ui.utils.SlideAnimationUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -51,8 +42,8 @@ public class IdeasActivity extends BaseActivity {
     @BindView(R.id.container_ideas)
     protected LinearLayout containerIdeas;
 
-    @BindView(R.id.card_inspiration)
-    protected CardView cardInspiration;
+    @BindView(R.id.image_inspiration)
+    protected ImageView imgInspiration;
 
     @BindView(R.id.card_ideas)
     protected CardView cardIdeas;
@@ -100,7 +91,7 @@ public class IdeasActivity extends BaseActivity {
         mIdeaManager = new IdeaManager(this);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        txtNewIdea.clearFocus();
+        txtNewIdea.requestFocus();
 
         setRecyclerView();
         setAdapter();
@@ -180,7 +171,6 @@ public class IdeasActivity extends BaseActivity {
                 super.onSuccess(result);
 
                 txtInspiration.setText(result.getName());
-                txtNewIdea.clearFocus();
             }
 
             @Override
@@ -252,8 +242,14 @@ public class IdeasActivity extends BaseActivity {
      * Change visibility of all cards (lists) to show
      */
     private void showCards() {
-        cardInspiration.setVisibility(View.VISIBLE);
+        imgInspiration.setVisibility(View.VISIBLE);
         cardIdeas.setVisibility(View.VISIBLE);
+
+        final Calendar calendar = Calendar.getInstance();
+        int dayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
+        final int totalImages = Constants.Inspirations.imagesList.length;
+        final int nextImage = Constants.Inspirations.imagesList[dayOfYear % totalImages];
+        imgInspiration.setImageResource(nextImage);
     }
 
     /**
@@ -411,6 +407,8 @@ public class IdeasActivity extends BaseActivity {
             if (!ideaSaved) {
                 logEvent(Constants.Event.SAVE_INSPIRATION, idea.getName());
                 saveIdea(idea);
+            } else {
+                generateToast(getString(R.string.remove_idea_dialog_message));
             }
         }
     }

@@ -9,6 +9,9 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.listdome.app.R;
 import com.listdome.app.infrastructure.operation.OperationError;
 import com.listdome.app.infrastructure.operation.OperationListener;
@@ -59,6 +62,7 @@ public class AnalysisActivity extends BaseActivity {
 
     protected AnalysisManager mAnalysisManager;
 
+
     @Override
     protected int getContentViewId() {
         return R.layout.activity_analysis;
@@ -86,6 +90,7 @@ public class AnalysisActivity extends BaseActivity {
         getWeeklyTaskAnalysis();
         getMonthlyTaskAnalysis();
         animateCards();
+        showAds();
     }
 
     @Override

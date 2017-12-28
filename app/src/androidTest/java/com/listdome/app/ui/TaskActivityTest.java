@@ -97,7 +97,7 @@ public class TaskActivityTest {
 
         //Add 2 tasks
         addItem("Task 1", R.id.new_task, R.id.add_task);
-        addItem("Task 1", R.id.new_task, R.id.add_task);
+        addItem("Task 2", R.id.new_task, R.id.add_task);
 
         //Validate list size
         validateListCard(R.id.list_todo, R.id.check_todo_task, R.id.text_todo_task,

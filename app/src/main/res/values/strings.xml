@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">ListDo.Me</string>
+    <string name="admob_app_id">ca-app-pub-12345</string>
+    <string name="admob_ad_id">"ca-app-pub-1234567890"</string>
 
     <!-- TITLE -->
     <string name="title_tasks">Daily Tasks</string>
@@ -31,11 +33,83 @@
     <string name="ideas_list_error">There was an error while loading the ideas. Please, try again.</string>
     <string name="ideas_card_inspiration">DAILY INSPIRATION</string>
     <string name="idea_inspiration_hint">The inspiration for today is…</string>
-    <string name="ideas_card_list">IDEAS LIST</string>
+    <string name="ideas_card_list">IDEAS</string>
     <string name="idea_add_hint">New Idea</string>
     <string name="idea_list_hint">Idea</string>
     <string name="remove_idea_dialog_title">Delete Idea?</string>
     <string name="remove_idea_dialog_message">Are you sure you want to delete this idea?</string>
+    <string name="inspiration_saved">This inspiration is already saved in your IDEAS list!</string>
+
+    <!-- INSPIRATIONS -->
+    <string name="inspiration_1">Unplug every 90 minutes.</string>
+    <string name="inspiration_2">Organizing and track your tasks.</string>
+    <string name="inspiration_3">Turn ideas into actions.</string>
+    <string name="inspiration_4">Work in natural light.</string>
+    <string name="inspiration_5">Listen to classical music.</string>
+    <string name="inspiration_6">Smile and laugh.</string>
+    <string name="inspiration_7">Be grateful.</string>
+    <string name="inspiration_8">Read 10 pages of a book. Every day.</string>
+    <string name="inspiration_9">Pay attention to your breathing.</string>
+    <string name="inspiration_10">Ask questions.</string>
+    <string name="inspiration_11">Organize your workplace.</string>
+    <string name="inspiration_12">Plan your day the night before.</string>
+    <string name="inspiration_13">Watch TED Talks.</string>
+    <string name="inspiration_14">Prioritize your "to do" items.</string>
+    <string name="inspiration_15">Sleep 8 hours.</string>
+    <string name="inspiration_16">Don\'t procrastinate.</string>
+    <string name="inspiration_17">Make up your bed.</string>
+    <string name="inspiration_18">Take advantage of the morning hours.</string>
+    <string name="inspiration_19">Drink water.</string>
+    <string name="inspiration_20">Watch something that will make you laugh.</string>
+    <string name="inspiration_21">Eat well. Eat healthy.</string>
+    <string name="inspiration_22">Don\'t multitask. Keep focus.</string>
+    <string name="inspiration_23">Pray.</string>
+    <string name="inspiration_24">Write down your ideas.</string>
+    <string name="inspiration_25">Review your to-do list and mentally map out your day.</string>
+    <string name="inspiration_26">Meditate.</string>
+    <string name="inspiration_27">Be organized.</string>
+    <string name="inspiration_28">Arrive at least 15 minutes before any appointment.</string>
+    <string name="inspiration_29">Walk outside during break times.</string>
+    <string name="inspiration_30">Build a routine.</string>
+    <string name="inspiration_31">Schedule your day.</string>
+    <string name="inspiration_32">Stop Thinking, Start Doing.</string>
+    <string name="inspiration_33">The morning is the best time to get important things done.</string>
+    <string name="inspiration_34">Study.</string>
+    <string name="inspiration_35">Exercise for 30 minutes.</string>
+    <string name="inspiration_36">Make jokes.</string>
+    <string name="inspiration_37">Focus on your breathing.</string>
+    <string name="inspiration_38">Finish what you start.</string>
+    <string name="inspiration_39">Do your most important work first.</string>
+    <string name="inspiration_40">Wear sunscreen.</string>
+    <string name="inspiration_41">Courage means you don\'t let fear stop you.</string>
+    <string name="inspiration_42">Learn something new every day.</string>
+    <string name="inspiration_43">Forgive.</string>
+    <string name="inspiration_44">Respect your elders.</string>
+    <string name="inspiration_45">Get meaningful things done.</string>
+    <string name="inspiration_46">Stretch, stand, and walk.</string>
+    <string name="inspiration_47">Devote just 1 hour of your day to the best opportunity in your life.</string>
+    <string name="inspiration_48">Show gratitude for people in your life.</string>
+    <string name="inspiration_49">Meet deadlines, be trustworthy.</string>
+    <string name="inspiration_50">Care, but don\'t worry. The anxiety will never help.</string>
+    <string name="inspiration_51">Read 2 articles every day.</string>
+    <string name="inspiration_52">Move out of your comfort zone.</string>
+    <string name="inspiration_53">Don\'t be afraid of the future, but be prepared for it.</string>
+    <string name="inspiration_54">Keep a clean and minimalist work environment.</string>
+    <string name="inspiration_55">Incorporate 12 hour intermittent fasting into your day.</string>
+    <string name="inspiration_56">Talk to someone you like.</string>
+    <string name="inspiration_57">“Productivity isn’t about doing more things — it’s about doing the right things.”</string>
+    <string name="inspiration_58">YOU are your biggest investment!</string>
+    <string name="inspiration_59">Success is outside your comfort zone.</string>
+    <string name="inspiration_60">Set daily goal(s).</string>
+    <string name="inspiration_61">Increase your productivity. Work in 50 minute time blocks.</string>
+    <string name="inspiration_62">Be grateful for the smallest things in life, and appreciate then.</string>
+    <string name="inspiration_63">Have an open mind and an innovative vision. Don\'t be afraid to ask: "What if …"</string>
+    <string name="inspiration_64">Develop empathy. Look into a person\'s eye when talking.</string>
+    <string name="inspiration_65">Exit automatic mode. Do things in different ways than usual.</string>
+    <string name="inspiration_66">Admit your mistakes and apologize.</string>
+    <string name="inspiration_67">Don\'t procrastinate. Don\'t expect the "perfect moment".</string>
+    <string name="inspiration_68">“The most important investment you can make is in yourself."</string>
+    <string name="inspiration_69">Be authentic, but not inconvenient. Wait for the most appropriate time to put your opinion.</string>
 
     <!-- ANALYSIS -->
     <string name="analysis_card_no_result">Unable to calculate</string>

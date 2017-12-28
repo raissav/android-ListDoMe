@@ -1,5 +1,8 @@
 package com.listdome.app.business;
 
+import android.content.Context;
+import android.test.mock.MockContext;
+
 import com.listdome.app.entity.Idea;
 import com.listdome.app.gateway.database.dao.IdeaDao;
 import com.listdome.app.infrastructure.operation.OperationResult;
@@ -17,6 +20,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,12 +31,17 @@ public class IdeaBusinessTest {
     @Mock
     IdeaDao ideaDao;
 
+    @Mock
+    Context context;
+
     @Test
     public void getInspiration_success() {
 
+        when(context.getString(anyInt())).thenReturn("INSPIRATION");
+
         final IdeaBusiness ideaBusiness = new IdeaBusiness(ideaDao);
 
-        final OperationResult<Idea> result = ideaBusiness.getDailyInspiration();
+        final OperationResult<Idea> result = ideaBusiness.getDailyInspiration(context);
 
         assertNotNull(result);
         assertNotNull(result.getResult());

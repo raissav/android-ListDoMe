@@ -21,11 +21,14 @@ public class IdeaManager extends BaseManager {
     private static final String TAG = IdeaManager.class.getSimpleName();
 
     private final IdeaBusiness ideasBusiness;
+    private final Context context;
 
     public IdeaManager(final Context context) {
         super(context);
 
-        ideasBusiness = new IdeaBusiness(DaoFactory.getInstance().createIdeaDAO(context));
+        this.context = context;
+        this.ideasBusiness = new IdeaBusiness(
+                DaoFactory.getInstance().createIdeaDAO(context));
     }
 
     public void getDailyInspiration(final OperationListener<Idea> listener) {
@@ -76,7 +79,7 @@ public class IdeaManager extends BaseManager {
 
         @Override
         protected OperationResult<Idea> doInBackground(final Void... params) {
-            return ideasBusiness.getDailyInspiration();
+            return ideasBusiness.getDailyInspiration(context);
         }
 
         @Override

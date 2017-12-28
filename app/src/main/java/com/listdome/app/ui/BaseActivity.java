@@ -17,6 +17,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.listdome.app.R;
 import com.listdome.app.infrastructure.Constants;
@@ -43,7 +47,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
     @BindView(R.id.navigation)
     protected BottomNavigationView navigationView;
 
-    private FirebaseAnalytics mFirebaseAnalytics;
+    protected FirebaseAnalytics mFirebaseAnalytics;
+    protected InterstitialAd mInterstitialAd;
+    protected boolean adDisplayed;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -52,6 +58,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         ButterKnife.bind(this);
 
         loadFirebase();
+        loadAds();
         configureToolBarAndNavigationView();
         animateTransaction();
         animateToolbar();
@@ -126,6 +133,26 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
      */
     private void loadFirebase() {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+    }
+
+    /**
+     * Configure and initialize MobAds.
+     */
+    protected void loadAds() {
+        Log.v(TAG, "[method] configureAds");
+
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        adDisplayed = true;
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                showAds();
+            }
+        });
+
     }
 
     /**
@@ -223,6 +250,20 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         final Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.VALUE, value);
         mFirebaseAnalytics.logEvent(event, bundle);
+    }
+
+    /**
+     * Display the ad for the user.
+     */
+    protected void showAds() {
+        if (!adDisplayed && mInterstitialAd.isLoaded()) {
+            Log.v(TAG, "[result] showAds - The interstitial is loaded.");
+            mInterstitialAd.show();
+            adDisplayed = true;
+        } else {
+            Log.v(TAG, "[result] showAds - The interstitial wasn't loaded yet.");
+            adDisplayed = false;
+        }
     }
 
     protected abstract int getContentViewId();

@@ -75,7 +75,7 @@ public class IdeaActivityTest {
         //Validate toolbar
         validateToolbar(R.string.title_ideas);
 
-        validateInspirationCard(R.id.card_inspiration, R.id.title_inspiration,
+        validateInspirationCard(R.id.image_inspiration, R.id.title_inspiration,
                 R.id.text_inspiration, R.string.ideas_card_inspiration, R.id.save_inspiration);
 
         //Validate Idea List Card

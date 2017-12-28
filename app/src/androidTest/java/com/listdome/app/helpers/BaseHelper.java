@@ -130,7 +130,7 @@ public class BaseHelper {
     }
 
     public static void validateInspirationCard(final int cardId, final int titleId, final int valueId,
-                                            final int titleTextId, final int buttonId) {
+                                                final int titleTextId, final int buttonId) {
 
         onView(withId(cardId)).check(matches(isDisplayed()));
 
