@@ -63,15 +63,17 @@
 
                 <TextView
                     android:id="@+id/text_inspiration"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
+                    android:paddingRight="50dp"
+                    android:paddingEnd="50dp"
                     android:textSize="18sp"
                     android:textColor="@color/lightGrey"
                     android:scrollbars="vertical"
                     android:text="@string/idea_inspiration_hint"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title_inspiration"/>
+                    app:layout_constraintEnd_toStartOf="@+id/save_inspiration"
+                    app:layout_constraintTop_toBottomOf="@id/title_inspiration" />
 
                 <ImageButton
                     android:id="@+id/save_inspiration"
