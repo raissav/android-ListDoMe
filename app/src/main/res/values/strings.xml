@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">ListDo.Me</string>
     <string name="admob_app_id">ca-app-pub</string>
-    <string name="admob_ad_id">"ca-app-pub"</string>
+    <string name="admob_ad_id">ca-app-pub</string>
+    <string name="admob_ad_id_test">ca-app-pub-3940256099942544/1033173712</string>
 
     <!-- TITLE -->
     <string name="title_tasks">Daily Tasks</string>

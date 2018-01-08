@@ -143,7 +143,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
 
         MobileAds.initialize(this, getString(R.string.admob_app_id));
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId(getString(R.string.admob_ad_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         adDisplayed = true;
 

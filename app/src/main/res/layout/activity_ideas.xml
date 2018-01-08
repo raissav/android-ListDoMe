@@ -63,18 +63,14 @@
 
                 <TextView
                     android:id="@+id/text_inspiration"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
-                    android:layout_marginRight="55dp"
-                    android:layout_marginEnd="55dp"
                     android:textSize="18sp"
                     android:textColor="@color/lightGrey"
-                    android:layout_gravity="center"
                     android:scrollbars="vertical"
                     android:text="@string/idea_inspiration_hint"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/save_inspiration"
                     app:layout_constraintTop_toBottomOf="@id/title_inspiration"/>
 
                 <ImageButton
@@ -85,11 +81,11 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
                     android:layout_marginEnd="15dp"
+                    android:layout_marginRight="15dp"
                     android:contentDescription="@string/idea_inspiration_hint"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title_inspiration"  />
+                    app:layout_constraintEnd_toEndOf="@id/image_inspiration"
+                    app:layout_constraintTop_toBottomOf="@id/title_inspiration" />
 
             </android.support.constraint.ConstraintLayout>
 
