@@ -1,16 +1,16 @@
 <resources>
     <string name="app_name">ListDo.Me</string>
-    <string name="admob_app_id">ca-app-pub-12345</string>
-    <string name="admob_ad_id">"ca-app-pub-1234567890"</string>
+    <string name="admob_app_id">ca-app-pub-</string>
+    <string name="admob_ad_id">"ca-app-pub-"</string>
 
     <!-- TITLE -->
     <string name="title_tasks">Daily Tasks</string>
-    <string name="title_ideas">Inspiring Ideas</string>
+    <string name="title_ideas">My Goals</string>
     <string name="title_analysis">Progress Analysis</string>
 
     <!-- MENU -->
     <string name="title_menu_tasks">Tasks</string>
-    <string name="title_menu_ideas">Ideas</string>
+    <string name="title_menu_ideas">Goals</string>
     <string name="title_menu_analysis">Analysis</string>
 
     <!-- TASKS -->
@@ -30,15 +30,15 @@
     <string name="check_todo_task">check_todo_task</string>
 
     <!-- IDEAS -->
-    <string name="ideas_list_error">There was an error while loading the ideas. Please, try again.</string>
+    <string name="ideas_list_error">There was an error while loading the goals. Please, try again.</string>
     <string name="ideas_card_inspiration">DAILY INSPIRATION</string>
     <string name="idea_inspiration_hint">The inspiration for today is…</string>
-    <string name="ideas_card_list">IDEAS</string>
-    <string name="idea_add_hint">New Idea</string>
-    <string name="idea_list_hint">Idea</string>
-    <string name="remove_idea_dialog_title">Delete Idea?</string>
-    <string name="remove_idea_dialog_message">Are you sure you want to delete this idea?</string>
-    <string name="inspiration_saved">This inspiration is already saved in your IDEAS list!</string>
+    <string name="ideas_card_list">GOALS</string>
+    <string name="idea_add_hint">New Goal</string>
+    <string name="idea_list_hint">Goal</string>
+    <string name="remove_idea_dialog_title">Delete Goal?</string>
+    <string name="remove_idea_dialog_message">Are you sure you want to delete this goal?</string>
+    <string name="inspiration_saved">This inspiration is already saved in your Goals List.</string>
 
     <!-- INSPIRATIONS -->
     <string name="inspiration_1">Unplug every 90 minutes.</string>
@@ -52,7 +52,7 @@
     <string name="inspiration_9">Pay attention to your breathing.</string>
     <string name="inspiration_10">Ask questions.</string>
     <string name="inspiration_11">Organize your workplace.</string>
-    <string name="inspiration_12">Plan your day the night before.</string>
+    <string name="inspiration_12">Plan the following day before you go to bed at night.</string>
     <string name="inspiration_13">Watch TED Talks.</string>
     <string name="inspiration_14">Prioritize your "to do" items.</string>
     <string name="inspiration_15">Sleep 8 hours.</string>
@@ -108,8 +108,19 @@
     <string name="inspiration_65">Exit automatic mode. Do things in different ways than usual.</string>
     <string name="inspiration_66">Admit your mistakes and apologize.</string>
     <string name="inspiration_67">Don\'t procrastinate. Don\'t expect the "perfect moment".</string>
-    <string name="inspiration_68">“The most important investment you can make is in yourself."</string>
+    <string name="inspiration_68">“The most important investment you can make is in yourself.”</string>
     <string name="inspiration_69">Be authentic, but not inconvenient. Wait for the most appropriate time to put your opinion.</string>
+    <string name="inspiration_70">“The biggest risk is not to take any risk.”</string>
+    <string name="inspiration_71">Be honest.</string>
+    <string name="inspiration_72">Time doesn\'t change things. It’s how we use our time that makes the difference.</string>
+    <string name="inspiration_73">“The future depends on what you do today.”</string>
+    <string name="inspiration_74">“There is only one thing that makes a dream impossible to achieve: the fear of failure.”</string>
+    <string name="inspiration_75">Find a morning routine that works for you.</string>
+    <string name="inspiration_76">Know your strengths and weaknesses.</string>
+    <string name="inspiration_77">Take it one step at a time.</string>
+    <string name="inspiration_78">Get up early.</string>
+    <string name="inspiration_79">Learn three words in a new language every day.</string>
+    <string name="inspiration_80">Go to bed and get up at similar times each day.</string>
 
     <!-- ANALYSIS -->
     <string name="analysis_card_no_result">Unable to calculate</string>

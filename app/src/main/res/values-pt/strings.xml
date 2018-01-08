@@ -3,21 +3,21 @@
 
     <!-- TITLE -->
     <string name="title_tasks">Tarefas Diárias</string>
-    <string name="title_ideas">Ideais Inspiradoras</string>
+    <string name="title_ideas">Minhas Metas</string>
     <string name="title_analysis">Análise de Progresso</string>
 
     <!-- MENU -->
     <string name="title_menu_tasks">Tarefas</string>
-    <string name="title_menu_ideas">Ideais</string>
+    <string name="title_menu_ideas">Metas</string>
     <string name="title_menu_analysis">Análise</string>
 
     <!-- TASKS -->
-    <string name="task_list_error">Não foi possível carregar os dados das tarefas. Tente novamente.</string>
+    <string name="task_list_error">Não foi possível carregar as tarefas. Tente novamente.</string>
     <string name="task_add_hint">Nova Tarefa</string>
     <string name="task_list_hint">Tarefa</string>
-    <string name="task_card_todo">TO-DO</string>
-    <string name="task_card_doing">DOING</string>
-    <string name="task_card_done">DONE</string>
+    <string name="task_card_todo">PENDENTE</string>
+    <string name="task_card_doing">EM PROGRESSO</string>
+    <string name="task_card_done">CONCLUÍDO</string>
     <string name="remove_task_dialog_title">Remover Tarefa?</string>
     <string name="remove_task_dialog_message">Tem certeza que deseja remover a tarefa?</string>
     <string name="stop_task_dialog_title">Parar Tarefa?</string>
@@ -27,15 +27,15 @@
     <string name="done">concluída</string>
 
     <!-- IDEAS -->
-    <string name="ideas_list_error">Não foi possível carregar os dados das ideias. Tente novamente.</string>
+    <string name="ideas_list_error">Não foi possível carregar as metas. Tente novamente.</string>
     <string name="ideas_card_inspiration">INSPIRAÇÃO DIÁRIA</string>
     <string name="idea_inspiration_hint">A inspiração do dia é…</string>
-    <string name="ideas_card_list">IDEIAS</string>
-    <string name="idea_add_hint">Nova Ideia</string>
-    <string name="idea_list_hint">Ideia</string>
-    <string name="remove_idea_dialog_title">Remover Ideia?</string>
-    <string name="remove_idea_dialog_message">Tem certeza que deseja remover a ideia?</string>
-    <string name="inspiration_saved">Essa inspiração já está salva na lista de IDEIAS!</string>
+    <string name="ideas_card_list">METAS</string>
+    <string name="idea_add_hint">Nova Meta</string>
+    <string name="idea_list_hint">Meta</string>
+    <string name="remove_idea_dialog_title">Remover Meta?</string>
+    <string name="remove_idea_dialog_message">Tem certeza que deseja remover essa meta?</string>
+    <string name="inspiration_saved">Essa inspiração já está salva na Lista de Metas.</string>
 
     <!-- INSPIRATIONS -->
     <string name="inspiration_1">Se desligue do que estiver fazendo a cada 90 minutos.</string>
@@ -49,7 +49,7 @@
     <string name="inspiration_9">Preste atenção na sua respiração.</string>
     <string name="inspiration_10">Faça perguntas.</string>
     <string name="inspiration_11">Organize seu local de trabalho.</string>
-    <string name="inspiration_12">Planeje seu dia na noite anterior.</string>
+    <string name="inspiration_12">Planeje o próximo dia antes de ir dormir.</string>
     <string name="inspiration_13">Assista à TED Talks.</string>
     <string name="inspiration_14">Priorize sua lista de tarefas "a fazer".</string>
     <string name="inspiration_15">Durma 8 horas por dia.</string>
@@ -107,6 +107,17 @@
     <string name="inspiration_67">Não procrastine. Não espere pelo "momento perfeito".</string>
     <string name="inspiration_68">“O investimento mais importante que você pode fazer é em você mesmo."</string>
     <string name="inspiration_69">Seja autêntico, mas não inconveniente. Espere o momento mais adequado para colocar a sua opinião.</string>
+    <string name="inspiration_70">“O maior risco é não correr nenhum risco.”</string>
+    <string name="inspiration_71">Seja honesto.</string>
+    <string name="inspiration_72">O tempo não muda as coisas. É a maneira como usamos nosso tempo que faz a diferença.</string>
+    <string name="inspiration_73">“O seu futuro depende do que você está fazendo hoje.”</string>
+    <string name="inspiration_74">“Há apenas uma coisa que faz com que um sonho se torne impossível: o medo de errar.”</string>
+    <string name="inspiration_75">Encontre uma rotina matinal que funcione para você.</string>
+    <string name="inspiration_76">Saiba quais são as suas forças e fraquezas.</string>
+    <string name="inspiration_77">Dê um passo de cada vez.</string>
+    <string name="inspiration_78">Acorde cedo para que seu dia renda mais.</string>
+    <string name="inspiration_79">Prenda três palavras de uma nova língua todos os dias.</string>
+    <string name="inspiration_80">Tente dormir e acordar em horários parecidos a cada dia.</string>
 
     <!-- ANALYSIS -->
     <string name="analysis_card_no_result">Não foi possível calcular</string>

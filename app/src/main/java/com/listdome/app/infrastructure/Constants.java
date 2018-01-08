@@ -112,13 +112,25 @@ public final class Constants {
                 R.string.inspiration_66,
                 R.string.inspiration_67,
                 R.string.inspiration_68,
-                R.string.inspiration_69
+                R.string.inspiration_69,
+                R.string.inspiration_70,
+                R.string.inspiration_71,
+                R.string.inspiration_72,
+                R.string.inspiration_73,
+                R.string.inspiration_74,
+                R.string.inspiration_75,
+                R.string.inspiration_76,
+                R.string.inspiration_77,
+                R.string.inspiration_78,
+                R.string.inspiration_79,
+                R.string.inspiration_80
         };
         public static final int[] imagesList = {
                 R.drawable.inspiration_ballons,
                 R.drawable.inspiration_dreams,
                 R.drawable.inspiration_mountains,
-                R.drawable.inspiration_ideas
+                //R.drawable.inspiration_ideas,
+                R.drawable.inspiration_dandelion
         };
     }
 }

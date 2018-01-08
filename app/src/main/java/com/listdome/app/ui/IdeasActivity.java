@@ -197,7 +197,6 @@ public class IdeasActivity extends BaseActivity {
                 super.onSuccess(result);
 
                 processIdeaList(result);
-                txtNewIdea.clearFocus();
             }
 
             @Override
@@ -408,7 +407,7 @@ public class IdeasActivity extends BaseActivity {
                 logEvent(Constants.Event.SAVE_INSPIRATION, idea.getName());
                 saveIdea(idea);
             } else {
-                generateToast(getString(R.string.remove_idea_dialog_message));
+                generateToast(getString(R.string.inspiration_saved));
             }
         }
     }
